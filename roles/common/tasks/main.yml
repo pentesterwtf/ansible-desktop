@@ -24,16 +24,19 @@
   dnf: 
     name: ['google-chrome-stable']
 
-- lineinfile:
+- name: Add gobins to PATH
+  lineinfile:
     path: ~/.bashrc
     line: "export PATH=~/go/bin:$PATH"
   become: no
 
-- lineinfile:
+- name: Alias vi to vim (privileged)
+  lineinfile:
     path: ~/.bashrc
     line: "alias vi=vim"
 
-- lineinfile:
+- name: Alias vi to vim (unprivileged)
+  lineinfile:
     path: ~/.bashrc
     line: "alias vi=vim"
   become: no
@@ -61,7 +64,6 @@
   shell: go get github.com/zxsecurity/glugger
   become: no
   when: is_installed.rc == 2
-
 
 - name: Install python things
   pip:
