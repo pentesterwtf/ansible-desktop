@@ -12,7 +12,7 @@
 
 - name: Install common
   dnf: 
-    name: ['git', 'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'nmap', 'screen', 'python-pip', 'vim-enhanced', 'libselinux-python', 'zlib-devel', 'golang', 'aria2', 'binwalk', 'ruby-devel', 'remmina', 'fedora-workstation-repositories']
+    name: ['git', 'git-lfs',  'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'nmap', 'screen', 'python-pip', 'vim-enhanced', 'libselinux-python', 'zlib-devel', 'golang', 'aria2', 'binwalk', 'ruby-devel', 'remmina', 'fedora-workstation-repositories']
 
 - name: Enable Google Chrome in Fedora-Workstation-Repositories
   dnf:

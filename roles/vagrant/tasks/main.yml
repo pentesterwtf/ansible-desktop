@@ -7,16 +7,10 @@
 'libxml2-devel', 'libvirt-devel', 'libguestfs-tools-c', 'libxslt-devel', 
 'libxml2-devel', 'libvirt-devel', 'libguestfs-tools-c']
 
-- name: Get latest build of packer
-  shell:  curl -s https://checkpoint-api.hashicorp.com/v1/check/vagrant | jq -c '[.current_version] | .[]' | sed "s/\"//g"
-  changed_when: no
-  register: latest_url
-  args:
-    warn: false
-
+# Workaround - Due to https://github.com/vagrant-libvirt/vagrant-libvirt/issues/1031
 - name: install vagrant
   dnf:
-    name: 'https://releases.hashicorp.com/vagrant/{{latest_url.stdout}}/vagrant_{{latest_url.stdout}}_x86_64.rpm'
+    name: vagrant
     state: present
 
 # Check if installed
@@ -56,6 +50,17 @@
 
 # vagrant-libvirt
 - name: Install vagrant-libvirt plugin
-  shell: CONFIGURE_ARGS='with-ldflags=-L/opt/vagrant/embedded/lib with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib' GEM_HOME=~/.vagrant.d/gems GEM_PATH=$GEM_HOME:/opt/vagrant/embedded/gems PATH=/opt/vagrant/embedded/bin:$PATH vagrant plugin install vagrant-libvirt
+  shell: vagrant plugin install vagrant-libvirt
   become: no
   when: '"vagrant-libvirt" not in vagrant_plugins.stdout'
+
+# Fedora build of vagrant does not include winrm specifics
+- name: Install vagrant winrm 
+  shell: vagrant plugin install winrm
+  become: no
+  when: '"winrm" not in vagrant_plugins.stdout'
+
+- name: Install vagrant winrm-elevated
+  shell: vagrant plugin install winrm-elevated
+  become: no
+  when: '"winrm-elevated" not in vagrant_plugins.stdout'
