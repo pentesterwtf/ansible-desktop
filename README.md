@@ -1,6 +1,6 @@
 # Desktop Deploy
 
-* Dodgy ansible script to setup my Fedora(M'lady)/30 host
+* Dodgy ansible script to setup a Fedora 31 host
 
 
 ## Running
