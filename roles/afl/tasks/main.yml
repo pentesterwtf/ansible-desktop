@@ -1,0 +1,35 @@
+---
+- name: Install prereqs
+  dnf: name={{ item }}
+  with_items:
+   - gnuplot
+   - libtool
+   - automake
+   - bison
+   - glib2
+   - glib2-devel
+
+- name: Download and unpack
+  unarchive:
+    src: http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz
+    dest: /usr/src/
+    remote_src: yes
+  register: u
+
+- name: Compile and install
+  command: " {{ item }} chdir=/usr/src/afl-2.52b"
+  with_items:
+    - make
+    - make install
+  when: u.changed
+
+- name: Compile and install (qemu-mode)
+  command: " {{ item }} chdir=/usr/src/afl-2.52b/qemu_mode"
+  with_items:
+    - ./build_qemu_support.sh
+  when: u.changed
+
+- name: core deumps plz
+  shell: echo core > /proc/sys/kernel/core_pattern
+  when: u.changed
+  

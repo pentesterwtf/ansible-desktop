@@ -1,0 +1,17 @@
+---
+- name: Install prereqs
+  dnf: name={{ item }}
+  with_items:
+   - libini_config-devel
+
+- name: Download
+  git:
+    repo: https://github.com/zardus/preeny.git
+    dest: /usr/src/preeny
+  register: u
+
+- name: Compile and install
+  command: " {{ item }} chdir=/usr/src/preeny"
+  with_items:
+    - make
+  when: u.changed

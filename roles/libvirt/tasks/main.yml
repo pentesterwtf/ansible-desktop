@@ -1,0 +1,11 @@
+---
+- name: Install libvirt/virt-manager
+  dnf: 
+    name: ['libvirt-devel', '@virtualization']
+
+- name: Add user to libvirt group
+  user:
+    name={{ ansible_user }}
+    groups=libvirt
+    append=yes
+

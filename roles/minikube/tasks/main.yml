@@ -1,0 +1,23 @@
+---
+- name: get kubectl
+  get_url:
+    url:  https://storage.googleapis.com/kubernetes-release/release/v1.11.0/bin/linux/amd64/kubectl
+    dest: /usr/bin/kubectl
+    mode: 0755
+
+- name: get minikube
+  get_url:
+    url:  https://github.com/kubernetes/minikube/releases/download/v0.28.0/minikube-linux-amd64
+    dest: /usr/bin/minikube
+    mode: 0755
+
+- name: get kvm2 driver
+  get_url:
+    url:  https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-kvm2
+    dest: /usr/bin/docker-machine-driver-kvm2
+    mode: 0755
+
+- name: Default kvm2 driver
+  shell: minikube config set vm-driver kvm2
+  become: no
+  changed_when: no

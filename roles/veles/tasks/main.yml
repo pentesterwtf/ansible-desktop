@@ -1,0 +1,37 @@
+---
+- name: Install prereqs
+  dnf: name={{ item }}
+  with_items:
+   - cmake
+   - zlib
+   - qt
+   - python3
+   - python3-virtualenv
+   - openssl
+   - qt5-qtbase-devel
+# Deps on clang-tidy / clang-format from clang_latest
+
+- name: Grab latest
+  git:
+    repo: https://github.com/codilime/veles.git
+    dest: /usr/src/veles
+    depth: 1
+  register: grabbed
+
+- name: Create build folder
+  command: " {{ item }} chdir=/usr/src/veles"
+  with_items:
+    - mkdir -p build
+  when: grabbed.changed
+
+- name: Compile and install
+  command: " {{ item }} chdir=/usr/src/veles/build/"
+  with_items:
+    - cmake -D CMAKE_BUILD_TYPE=Release ..
+    - make
+    - make install
+  when: grabbed.changed
+
+- name: Remove temp files
+  command: "rm -rf /usr/src/veles/build/*"
+  when: grabbed.changed

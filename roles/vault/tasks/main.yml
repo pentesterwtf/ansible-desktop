@@ -1,0 +1,10 @@
+---
+- name: Check if already installed
+  command: ls -alh /usr/bin/vault
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+
+- name: Install
+  unarchive: src=https://releases.hashicorp.com/vault/0.9.1/vault_0.9.1_linux_amd64.zip dest=/usr/bin/  copy=no
+  when: is_installed.rc == 2

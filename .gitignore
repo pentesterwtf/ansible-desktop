@@ -1,0 +1,3 @@
+deploy.retry
+*.swp
+test.yml

@@ -1,0 +1,11 @@
+---
+- name: Install common
+  dnf: 
+    name: ['dnf-plugins-core']
+
+- name: Enable bazel
+  shell: dnf copr enable vbatts/bazel -y
+
+- name: Install bazel
+  dnf: 
+    name: ['bazel']

@@ -1,0 +1,50 @@
+---
+# Fuzzing lists
+# All go under /opt/fuzzlists
+
+- name: Create folder
+  file: dest=/opt/fuzzlists state=directory
+  become: yes
+ 
+# Intruder payloads, line seperated payloads for HTTP
+# https://github.com/1N3/IntruderPayloads.git
+
+- name: Create folder for IN3/IntruderPayloads
+  file: dest=/opt/fuzzlists/in3 state=directory
+  become: yes
+
+- name: Pull
+  git: repo=https://github.com/1N3/IntruderPayloads.git dest=/opt/fuzzlists/in3  depth=1 umask=000 
+  become: yes
+
+
+# big list of naughty strings
+# https://github.com/minimaxir/big-list-of-naughty-strings.git
+
+- name: Create folder for blns
+  file: dest=/opt/fuzzlists/blns state=directory
+  become: yes
+
+- name: Pull
+  git: repo=https://github.com/minimaxir/big-list-of-naughty-strings.git dest=/opt/fuzzlists/blns depth=1 umask=000 
+  become: yes
+
+
+# Payload all the tings
+# https://github.com/swisskyrepo/PayloadsAllTheThings.git
+
+- name: Create folder for patt
+  file: dest=/opt/fuzzlists/patt state=directory
+  become: yes
+
+- name: Pull
+  git: repo=https://github.com/swisskyrepo/PayloadsAllTheThings.git dest=/opt/fuzzlists/patt depth=1 umask=000 
+  become: yes
+
+# seclists
+# https://github.com/danielmiessler/SecLists.git
+
+- name: Pull
+  git: repo=https://github.com/danielmiessler/SecLists.git dest=/opt/fuzzlists/seclists depth=1 umask=000 
+  become: yes
+

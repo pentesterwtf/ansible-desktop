@@ -1,0 +1,65 @@
+---
+- name: Install prereqs
+  dnf: name={{ item }}
+  with_items:
+    - wayland-devel
+    - openssl-devel
+
+# CME 
+- name: Check if already installed
+  command: ls -alh /usr/src/crackmapexec
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+
+- name: clone repo
+  git: repo=https://github.com/byt3bl33d3r/CrackMapExec.git dest=/usr/src/crackmapexec/ depth=1
+  when: is_installed.rc == 2
+
+- name: install
+  shell: cd /usr/src/crackmapexec && python setup.py install
+  when: is_installed.rc == 2
+
+# Impacket
+- name: Check if already installed
+  command: ls -alh /usr/src/impacket
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+
+- name: clone repo
+  git: repo=https://github.com/CoreSecurity/impacket.git dest=/usr/src/impacket/ depth=1
+  when: is_installed.rc == 2
+
+- name: install
+  shell: cd /usr/src/impacket && python setup.py install
+  when: is_installed.rc == 2
+
+# RDP with pth support
+- name: Check if already installed
+  command: ls -alh /usr/src/freerdp
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+
+- name: clone repo
+  git: repo=https://github.com/FreeRDP/FreeRDP.git dest=/usr/src/freerdp/ depth=1
+  when: is_installed.rc == 2
+
+- name: install
+  shell: cd /usr/src/freerdp && cmake -DCMAKE_BUILD_TYPE=Debug -DWITH_SSE2=ON .
+  when: is_installed.rc == 2
+
+# Responder
+- name: clone repo
+  git: repo=https://github.com/lgandx/Responder.git dest=/opt/responder/ depth=1
+
+# Bloodhound ingester
+- name: clone repo
+  git: repo=https://github.com/fox-it/BloodHound.py.git dest=/opt/bloodhound/ depth=1
+
+# Ldapdump / sudo pip2.7 install ldapdomaindump
+- name: install ldapdump
+  pip:
+    name: ldapdomaindump
+    executable: pip-2.7

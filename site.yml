@@ -1,0 +1,31 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+
+  roles:
+    - uptodate
+    - common
+    - packer
+    - vagrant
+    - libvirt
+    - rust
+    - exploitdb
+    - floss
+    - fuzzlists
+    - recon
+    - afl
+    - veles
+    - radare2
+    - docker
+    - preeny
+    - radamsa
+    - terraform
+    - sdr
+    - proxmark3
+    - vault
+    - radare2
+    - veles
+    - lol_ad
+    - minikube
+    - bazel

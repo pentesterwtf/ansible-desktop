@@ -1,0 +1,21 @@
+---
+
+- name: Pull vagrant-cloud
+  git:
+    repo: https://github.com/pentesterwtf/vagrant-cloud
+    dest: /usr/src/vagrant-cloud
+    depth: 1
+  register: grabbed
+
+- name: copy to /tmp
+  command: "cp -r /usr/src/vagrant-cloud /tmp/"
+  when: grabbed.changed
+  become: no
+
+- name: Compile and install
+  command: " {{ item }} chdir=/tmp/vagrant-cloud/"
+  with_items:
+    - make all
+  when: grabbed.changed
+  become: no
+

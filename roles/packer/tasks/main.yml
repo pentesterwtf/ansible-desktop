@@ -1,0 +1,20 @@
+---
+- name: Get latest build of packer
+  shell:  curl -s https://checkpoint-api.hashicorp.com/v1/check/packer | jq -c '[.current_download_url] | .[]'
+  register: latest_url
+
+- name: Check if already installed
+  command: ls -alh /usr/bin/packer
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+
+- name: Version Check
+  shell: packer version | grep "out of date"
+  register: newbuild
+  failed_when: no
+  when: is_installed.rc == 0
+
+- name: Install packer
+  unarchive: src={{latest_url.stdout}}  dest=/usr/bin/ copy=no
+  when: (is_installed.rc == 2) OR (newbuild.rc == 130)

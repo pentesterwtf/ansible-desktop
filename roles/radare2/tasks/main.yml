@@ -1,0 +1,13 @@
+---
+- name: Grab latest
+  git:
+    repo: https://github.com/radare/radare2.git
+    dest: /usr/src/radare2
+    depth: 1
+  register: grabbed
+
+- name: Compile and install
+  command: " {{ item }} chdir=/usr/src/radare2"
+  with_items:
+    - sys/install.sh
+  when: grabbed.changed
