@@ -1,15 +1,29 @@
 ---
-- name: Add RPM Key
+- name: Add RPM Key (Microsoft)
   rpm_key:
     state: present
     key: https://packages.microsoft.com/keys/microsoft.asc
 
-- name: Add YUM Repo
+- name: Add RPM Key (Mono)
+  rpm_key:
+    state: present
+    key: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+
+- name: Add YUM Repo (Microsoft)
   yum_repository:
     name: packages-microsoft-com-prod
     baseurl: https://packages.microsoft.com/fedora/30/prod/
     description: Dotnet repos
 
+- name: Add YUM Repo (Mono)
+  yum_repository:
+    name: mono-centos8-stable
+    baseurl: https://download.mono-project.com/repo/centos8-stable/
+    description: Mono repos
+
 - name: Install dotnet
   dnf: 
-    name: ['dotnet-sdk-2.2']
+    name: ['dotnet-sdk-2.2', 'mono-complete']
+
+
+
