@@ -1,8 +1,7 @@
 ---
 - name: Install prereqs
-  dnf: name={{ item }}
-  with_items:
-   - libini_config-devel
+  dnf: 
+    name: ['libini_config-devel', 'libseccomp-devel']
 
 - name: Download
   git:

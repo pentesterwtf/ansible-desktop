@@ -20,6 +20,10 @@
     enablerepo: google-chrome
     state: present
 
+- name: Install Chrome
+  dnf: 
+    name: ['google-chrome-stable']
+
 - lineinfile:
     path: ~/.bashrc
     line: "export PATH=~/go/bin:$PATH"
@@ -103,15 +107,6 @@
   shell: ~/.bash_it/install.sh --silent
   when: is_installed.rc == 2
   become: no
-
-- name: set bash theme(non-root)
-  replace: dest=~/.bashrc regexp='bobby' replace='sexy'
-  when: is_installed.rc == 2
-  become: no
-
-- name: set bash theme(root)
-  replace: dest=~/.bashrc regexp='bobby' replace='sexy'
-  when: is_installed.rc == 2
 
 - name: ensure .vim exists (non-root)
   file:

@@ -1,7 +1,10 @@
 ---
 - name: Get latest build of packer
-  shell:  curl -s https://checkpoint-api.hashicorp.com/v1/check/packer | jq -c '[.current_download_url] | .[]'
+  shell:  curl -s https://checkpoint-api.hashicorp.com/v1/check/packer | jq -rc '.current_download_url + "packer_" + .current_version + "_linux_amd64.zip"' 
   register: latest_url
+  # Needed due to get_url module not doing enough here, slash dodgy sed requirements
+  args:
+    warn: false
 
 - name: Check if already installed
   command: ls -alh /usr/bin/packer
@@ -17,4 +20,4 @@
 
 - name: Install packer
   unarchive: src={{latest_url.stdout}}  dest=/usr/bin/ copy=no
-  when: (is_installed.rc == 2) OR (newbuild.rc == 130)
+  when: (is_installed.rc == 2) or (newbuild.rc == 130)

@@ -1,21 +1,17 @@
 ---
 - name: Install prereqs
-  dnf: name={{ item }}
-  with_items:
-   - wget
-   - git
-   - make
-   - gcc
+  dnf: 
+    name: ['wget', 'git', 'make', 'gcc']
 
 - name: Download
   git:
-    repo: https://github.com/aoh/radamsa.git
+    repo: https://gitlab.com/akihe/radamsa.git
     dest: /usr/src/radamsa
   register: u
 
 - name: Compile and install
   command: " {{ item }} chdir=/usr/src/radamsa"
   with_items:
-    - make
+    - make OFLAGS=-O1
     - make install
   when: u.changed

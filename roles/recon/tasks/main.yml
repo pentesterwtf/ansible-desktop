@@ -70,9 +70,7 @@
 
 # git fingerprint / https://blog.paradoxis.nl/fingerprinting-web-servers-with-git-e93be98b236 
 - name: Install python things
-  pip: name={{ item }} executable=pip-3
-  with_items:
-    - git-fingerprint
+  pip: name=git-fingerprint executable=pip-3
 
 # https://github.com/robertdavidgraham/masscan
 

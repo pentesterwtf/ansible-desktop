@@ -6,26 +6,24 @@
   roles:
     - uptodate
     - common
+    - lol_ad
+    - bazel
+    - afl
+    - proxmark3
+    - radamsa
     - packer
-    - vagrant
+    - dotnet
     - libvirt
     - rust
     - exploitdb
     - floss
     - fuzzlists
     - recon
-    - afl
     - veles
-    - radare2
     - docker
     - preeny
-    - radamsa
     - terraform
     - sdr
-    - proxmark3
     - vault
-    - radare2
     - veles
-    - lol_ad
-    - minikube
-    - bazel
+    - vagrant

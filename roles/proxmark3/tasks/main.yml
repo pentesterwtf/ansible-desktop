@@ -1,27 +1,23 @@
 ---
 - name: Install prereqs
-  dnf: name={{ item }}
-  with_items:
-   - readline-devel
-   - arm-none-eabi-gcc-cs
-   - arm-none-eabi-newlib
-   - avr-libc
+  dnf:
+    name: ['readline-devel', 'arm-none-eabi-gcc-cs', 'arm-none-eabi-newlib', 'avr-libc', 'pcsc-lite', 'pcsc-lite-devel']
 
 - name: Download
   git:
     repo: https://github.com/Proxmark/proxmark3.git
-    dest: /usr/src/proxmark3
+    dest: /opt/proxmark3
     depth: 1
   register: u
 
 - name: Compile and install
-  command: " {{ item }} chdir=/usr/src/proxmark3"
+  command: " {{ item }} chdir=/opt/proxmark3"
   with_items:
     - make
   when: u.changed
 
 
 - file:
-    src: /usr/src/proxmark3/client/proxmark3
+    src: /opt/proxmark3/client/proxmark3
     dest: /usr/bin/proxmark3
     state: link

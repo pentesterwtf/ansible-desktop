@@ -1,9 +1,7 @@
 ---
 - name: Install prereqs
-  dnf: name={{ item }}
-  with_items:
-    - wayland-devel
-    - openssl-devel
+  dnf:
+    name:  ['wayland-devel', 'openssl-devel', 'systemd-libs', 'redhat-rpm-config', 'python3-devel', 'python2-devel','cmake']
 
 # CME 
 - name: Check if already installed
@@ -41,14 +39,6 @@
   register: is_installed
   failed_when: is_installed.rc > 2
   changed_when: no
-
-- name: clone repo
-  git: repo=https://github.com/FreeRDP/FreeRDP.git dest=/usr/src/freerdp/ depth=1
-  when: is_installed.rc == 2
-
-- name: install
-  shell: cd /usr/src/freerdp && cmake -DCMAKE_BUILD_TYPE=Debug -DWITH_SSE2=ON .
-  when: is_installed.rc == 2
 
 # Responder
 - name: clone repo

@@ -1,13 +1,7 @@
 ---
 - name: Install prereqs
-  dnf: name={{ item }}
-  with_items:
-   - gnuplot
-   - libtool
-   - automake
-   - bison
-   - glib2
-   - glib2-devel
+  dnf: 
+    name: [ 'gnuplot', 'libtool', 'make','automake', 'bison', 'glib2', 'glib2-devel', 'msgpack-devel']
 
 - name: Download and unpack
   unarchive:
@@ -17,16 +11,10 @@
   register: u
 
 - name: Compile and install
-  command: " {{ item }} chdir=/usr/src/afl-2.52b"
+  command: "chdir=/usr/src/afl-2.52b/ {{ item }}"
   with_items:
     - make
     - make install
-  when: u.changed
-
-- name: Compile and install (qemu-mode)
-  command: " {{ item }} chdir=/usr/src/afl-2.52b/qemu_mode"
-  with_items:
-    - ./build_qemu_support.sh
   when: u.changed
 
 - name: core deumps plz

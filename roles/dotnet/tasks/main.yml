@@ -1,0 +1,15 @@
+---
+- name: Add RPM Key
+  rpm_key:
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Add YUM Repo
+  yum_repository:
+    name: packages-microsoft-com-prod
+    baseurl: https://packages.microsoft.com/fedora/30/prod/
+    description: Dotnet repos
+
+- name: Install dotnet
+  dnf: 
+    name: ['dotnet-sdk-2.2']

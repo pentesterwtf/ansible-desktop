@@ -1,19 +1,11 @@
 ---
 - name: Install prereqs
-  dnf: name={{ item }}
-  with_items:
-    - autoconf
-    - sysconftool
-    - libsndfile-devel
-    - alsa-lib-devel
-    - fftw-devel
+  dnf:
+    name: ['autoconf', 'sysconftool', 'libsndfile-devel', 'alsa-lib-devel', 'fftw-devel']
 
 - name: Install tools
-  dnf: name={{ item }}
-  with_items:
-    - hackrf
-    - gqrx
-    - urh
+  dnf:
+    name: ['hackrf', 'gqrx', 'urh']
 
 - name: Check if already installed
   command: ls -alh /usr/local/include/liquid

@@ -1,14 +1,7 @@
 ---
 - name: Install prereqs
-  dnf: name={{ item }}
-  with_items:
-   - cmake
-   - zlib
-   - qt
-   - python3
-   - python3-virtualenv
-   - openssl
-   - qt5-qtbase-devel
+  dnf:
+    name: ['cmake', 'zlib', 'qt', 'python3', 'python3-virtualenv', 'openssl', 'qt5-qtbase-devel', 'msgpack-devel']
 # Deps on clang-tidy / clang-format from clang_latest
 
 - name: Grab latest
@@ -25,7 +18,7 @@
   when: grabbed.changed
 
 - name: Compile and install
-  command: " {{ item }} chdir=/usr/src/veles/build/"
+  command: "chdir=/usr/src/veles/build/ {{ item }} "
   with_items:
     - cmake -D CMAKE_BUILD_TYPE=Release ..
     - make
