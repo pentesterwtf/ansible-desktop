@@ -15,7 +15,6 @@ ansible-playbook -i "localhost," -c local site.yml
 Installs the following:
 
 * afl (http://lcamtuf.coredump.cx/afl/)
-* clang with libfuzz (https://clang.llvm.org/ / https://llvm.org/docs/LibFuzzer.html )
 * radamsa (https://github.com/aoh/radamsa)
 * preeny (https://github.com/zardus/preeny)
 * docker-ce (https://docs.docker.com/engine/installation/linux/docker-ce/fedora/#install-docker-ce-1)
@@ -30,29 +29,20 @@ Installs the following:
   * CatMyFish (https://github.com/Mr-Un1k0d3r/CatMyFish)
 * SDR tools
   * Liquid DSP (https://github.com/jgaeddert/liquid-dsp)
+  * Universal Radio Hacker (https://github.com/jopohl/urh)
 * awscli (https://aws.amazon.com/cli/)
-  * Not configured by default!
-* Vagrant boxes
-  * vagrant-cloud (https://github.com/unsubtleguy/vagrant-cloud)
-  * Needs awscli to be configured to use!
-  * *Commented out by default*
 * Veles (https://veles.io/)
-* Radare2 (http://www.radare.org/r/)
 
 These are reflected under roles/
 
 The following are installed by the _common_ role:
-* vagrant (https://www.vagrantup.com/)
 * vim-enhanced
   * vim-polyglot (https://github.com/sheerun/vim-polyglot)
 * @virtualisation (https://fedoraproject.org/wiki/Getting_started_with_virtualization)
 * bash-it (https://github.com/Bash-it/bash-it)
 * chrome (https://google.com)
-* rustlang (https://www.rust-lang.org/en-US/)
-* redshift (http://jonls.dk/redshift/)
 * aria2 (https://aria2.github.io/)
 * NodeJS/NPM (https://nodejs.org/en/)
-* Scala (https://www.scala-sbt.org/)
 * Golang (https://golang.org/)
 * binwalk (https://github.com/ReFirmLabs/binwalk)
 
