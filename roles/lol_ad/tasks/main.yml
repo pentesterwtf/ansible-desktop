@@ -30,7 +30,7 @@
   when: is_installed.rc == 2
 
 - name: install
-  shell: cd /usr/src/impacket && python setup.py install
+  shell: cd /usr/src/impacket && pip install .
   when: is_installed.rc == 2
 
 # RDP with pth support

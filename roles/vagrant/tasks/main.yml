@@ -20,6 +20,12 @@
   register: vagrant_plugins
   changed_when: False
 
+# vagrant-digitalocean
+- name: Install vagrant-digitalocean plugin
+  shell: vagrant plugin install vagrant-digitalocean
+  become: no
+  when: '"vagrant-digitalocean" not in vagrant_plugins.stdout'
+
 # vagrant-libvirt
 - name: Install vagrant-libvirt plugin
   shell: vagrant plugin install vagrant-libvirt
