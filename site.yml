@@ -14,6 +14,7 @@
     - exploitdb
     - floss
     - fuzzlists
+    - kubectl
     - libvirt
     - proxmark3
     - preeny

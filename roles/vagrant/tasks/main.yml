@@ -9,7 +9,10 @@
 
 - name: Get latest build of packer
   shell:  curl -s https://checkpoint-api.hashicorp.com/v1/check/vagrant | jq -c '[.current_version] | .[]' | sed "s/\"//g"
+  changed_when: no
   register: latest_url
+  args:
+    warn: false
 
 - name: install vagrant
   dnf:

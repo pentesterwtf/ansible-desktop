@@ -150,3 +150,16 @@
     path: ~/.bashrc
     insertafter: "^#!/usr/bin/env"
     line: ". /etc/profile.d/vte.sh"
+
+- name: Change theme from bobby to sexy (root)
+  replace:
+    path: ~/.bashrc
+    regexp: bobby
+    replace: sexy
+
+- name: Change theme from bobby to sexy (default user)
+  replace:
+    path: ~/.bashrc
+    regexp: bobby
+    replace: sexy
+  become: no

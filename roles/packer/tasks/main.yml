@@ -2,6 +2,7 @@
 - name: Get latest build of packer
   shell:  curl -s https://checkpoint-api.hashicorp.com/v1/check/packer | jq -rc '.current_download_url + "packer_" + .current_version + "_linux_amd64.zip"' 
   register: latest_url
+  changed_when: no
   # Needed due to get_url module not doing enough here, slash dodgy sed requirements
   args:
     warn: false
@@ -14,6 +15,7 @@
 
 - name: Version Check
   shell: packer version | grep "out of date"
+  changed_when: no
   register: newbuild
   failed_when: no
   when: is_installed.rc == 0

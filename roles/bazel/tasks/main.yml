@@ -5,6 +5,9 @@
 
 - name: Enable bazel
   shell: dnf copr enable vbatts/bazel -y
+  changed_when: no
+  args:
+    warn: false
 
 - name: Install bazel
   dnf: 
