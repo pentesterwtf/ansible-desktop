@@ -1,11 +1,11 @@
 ---
 - name: Install prereqs
   dnf:
-    name: ['readline-devel', 'arm-none-eabi-gcc-cs', 'arm-none-eabi-newlib', 'avr-libc', 'pcsc-lite', 'pcsc-lite-devel']
+    name: ['git', 'make', 'gcc', 'gcc-c++', 'arm-none-eabi-gcc-cs', 'arm-none-eabi-newlib', 'readline-devel', 'qt5-qtbase-devel', 'libatomic']
 
 - name: Download
   git:
-    repo: https://github.com/Proxmark/proxmark3.git
+    repo: https://github.com/RfidResearchGroup/proxmark3.git
     dest: /opt/proxmark3
     depth: 1
   register: u
@@ -13,7 +13,8 @@
 - name: Compile and install
   command: " {{ item }} chdir=/opt/proxmark3"
   with_items:
-    - make
+    - make clean
+    - make all -j
   when: u.changed
 
 
