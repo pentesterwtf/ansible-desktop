@@ -26,5 +26,5 @@
     - terraform
     - veles
     - vault
-    - vagrant
+    # - vagrant
     - vscode

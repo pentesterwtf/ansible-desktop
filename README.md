@@ -56,4 +56,5 @@ Common also does the following:
 
 * Sets timezone to Australia/Melbourne
 * Enables SSH
-* Installs a bunch of vagrant plugins (scp/aws/gce/libvirt/digitalocean)
+* Install vagrant / vagrant-libvirt plugins
+  * No longer installs vagrant-gcp plugins due to mixed dependancy issues

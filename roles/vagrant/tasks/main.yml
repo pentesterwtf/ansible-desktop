@@ -13,40 +13,12 @@
     name: vagrant
     state: present
 
-# Check if installed
+# Populate list of plugins installed for vagrant
 - name: check if vagrant plugins are installed
   shell: vagrant plugin list
   become: no
   register: vagrant_plugins
   changed_when: False
-
-- name: Install vagrant aws plugin
-  shell: vagrant plugin install vagrant-aws
-  become: no
-  when: '"vagrant-aws" not in vagrant_plugins.stdout'
-- name: Install vagrant digitalocean plugin
-  shell: vagrant plugin install vagrant-digitalocean
-  become: no
-  when: '"vagrant-digitalocean" not in vagrant_plugins.stdout'
-
-# https://github.com/nasskach/vagrant-aws-dns
-
-- name: Install vagrant aws dns plugin
-  shell: vagrant plugin install vagrant-aws-dns
-  become: no
-  when: '"vagrant-aws-dns" not in vagrant_plugins.stdout'
-
-# https://github.com/mitchellh/vagrant-google
-
-- name: Install vagrant google-compute plugin
-  shell: vagrant plugin install vagrant-google
-  become: no
-  when: '"vagrant-google" not in vagrant_plugins.stdout'
-
-- name: Install vagrant scp plugin
-  shell: vagrant plugin install vagrant-scp
-  become: no
-  when: '"vagrant-scp" not in vagrant_plugins.stdout'
 
 # vagrant-libvirt
 - name: Install vagrant-libvirt plugin
