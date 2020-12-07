@@ -7,7 +7,6 @@
     - uptodate
     - common
     - afl
-    - lol_ad
     - bazel
     - docker
     - dotnet
@@ -16,8 +15,6 @@
     - fuzzlists
     - kubectl
     - libvirt
-    - proxmark3
-    - preeny
     - packer
     - radamsa
     - metasploit

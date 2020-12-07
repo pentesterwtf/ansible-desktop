@@ -1,12 +1,21 @@
 ---
-- name: add repo
-  shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-  changed_when: no
-  args:
-    warn: false
+# https://dev.to/yzwdroid/fedora-33-docker-445k
+# Note, you need to reboot for this because of cgroupsv2
 
-- name: Install docker
-  dnf: name=docker-ce
+- name: Check if already installed
+  command: grep "systemd.unified_cgroup_hierarchy=0" /etc/default/grub
+  register: cgroups
+  changed_when: no
+  check_mode: no
+  ignore_errors: yes
+
+- name: Set Cgroupsv2
+  command: grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+  when: cgroups.rc == 1
+
+- name: Install moby
+  dnf: 
+    name: ['moby-engine', 'docker-compose']
 
 - name: add ansible_user to docker group
   user: name={{ ansible_user }} append=yes groups=docker

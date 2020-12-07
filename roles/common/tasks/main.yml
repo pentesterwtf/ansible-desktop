@@ -12,7 +12,7 @@
 
 - name: Install common
   dnf: 
-    name: ['git', 'git-lfs',  'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'nmap', 'screen', 'python-pip', 'vim-enhanced', 'libselinux-python', 'zlib-devel', 'golang', 'aria2', 'binwalk', 'ruby-devel', 'remmina', 'fedora-workstation-repositories']
+    name: ['git', 'git-lfs',  'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'nmap', 'screen', 'python-pip', 'vim-enhanced', 'python3-libselinux', 'zlib-devel', 'golang', 'aria2', 'binwalk', 'ruby-devel', 'remmina', 'fedora-workstation-repositories']
 
 - name: Enable Google Chrome in Fedora-Workstation-Repositories
   dnf:
@@ -117,11 +117,18 @@
   become: no
 
 - name: clone vim-polyglot
-  git: repo=https://github.com/sheerun/vim-polyglot.git dest=/usr/src/vim-polyglot depth=1
+  git: 
+    repo: https://github.com/sheerun/vim-polyglot.git
+    dest: /usr/src/vim-polyglot
+    depth: 1
+  register: vimpolyglot
 
 - name: vim-polyglot (non-root)
-  shell: cp -r /usr/src/vim-polyglot/* ~/.vim/
-  when: is_installed.rc == 2
+  shell: "{{ item }}"
+  with_items:
+    - mkdir -p ~/.vim/pack/plugins/start/vim-polyglot
+    - cp -r /usr/src/vim-polyglot/* ~/.vim/
+  when: vimpolyglot.changed
   become: no
 
 - name: ensure .vim exists (root)
@@ -130,8 +137,11 @@
     state: directory
 
 - name: vim-polyglot (root)
-  shell: cp -r /usr/src/vim-polyglot/* ~/.vim/
-  when: is_installed.rc == 2
+  shell: "{{ item }}"
+  with_items:
+    - mkdir -p ~/.vim/pack/plugins/start/vim-polyglot
+    - cp -r /usr/src/vim-polyglot/* ~/.vim/
+  when: vimpolyglot.changed
 
 - name: screen dotfile
   copy:

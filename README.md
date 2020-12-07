@@ -1,6 +1,6 @@
 # Desktop Deploy
 
-* Dodgy ansible script to setup a Fedora 31 host
+* Dodgy ansible script to setup a Fedora 33 host
 
 
 ## Running
@@ -22,8 +22,7 @@ Installs the following:
 
 * afl (http://lcamtuf.coredump.cx/afl/)
 * radamsa (https://github.com/aoh/radamsa)
-* preeny (https://github.com/zardus/preeny)
-* docker-ce (https://docs.docker.com/engine/installation/linux/docker-ce/fedora/#install-docker-ce-1)
+* Moby (Docker - https://github.com/moby/moby)
 * packer (https://www.packer.io/)
 * terraform (https://www.terraform.io/)
   * terraform-inventory (https://github.com/adammck/terraform-inventory)
