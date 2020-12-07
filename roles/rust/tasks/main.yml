@@ -1,5 +1,12 @@
 ---
-- name: Install rust/cargo
-  dnf:
-    name: ['rust', 'cargo']
+- name: Check if already installed
+  command: ls -alh /home/$USER/.cargo/env
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+  become: no
 
+- name: Install rust nightly
+  shell: curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y
+  become: no
+  when: is_installed.rc == 2
