@@ -5,6 +5,7 @@
   gather_facts: false
   tasks:
   - name: Create 'testing' file
-    file: 
+    file:
       path: "/tmp/test_file"
       state: touch
+      mode: 0644

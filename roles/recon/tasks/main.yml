@@ -46,10 +46,10 @@
 # https://github.com/mdsecactivebreach/Chameleon.git
 
 - name: Create folder
-  file: dest=/opt/chameleon state=directory  mode=0644
+  file: dest=/opt/chameleon state=directory mode=0644
 
 - name: Pull
-  git: repo=https://github.com/mdsecactivebreach/Chameleon.git dest=/opt/chameleon umask=000 depth=1 update=no  mode=0644
+  git: repo=https://github.com/mdsecactivebreach/Chameleon.git dest=/opt/chameleon umask=000 depth=1 update=no
 
 - name: Set interpreter
   lineinfile: path=/opt/chameleon/chameleon.py  line="#!/usr/bin/env python" insertbefore="BOF"

@@ -14,7 +14,7 @@
   become: yes
 
 - name: Pull
-  git: repo=https://github.com/1N3/IntruderPayloads.git dest=/opt/fuzzlists/in3  depth=1 umask=000  mode=0644
+  git: repo=https://github.com/1N3/IntruderPayloads.git dest=/opt/fuzzlists/in3  depth=1 umask=000
   become: yes
 
 
@@ -26,7 +26,7 @@
   become: yes
 
 - name: Pull
-  git: repo=https://github.com/minimaxir/big-list-of-naughty-strings.git dest=/opt/fuzzlists/blns depth=1 umask=000  mode=0644
+  git: repo=https://github.com/minimaxir/big-list-of-naughty-strings.git dest=/opt/fuzzlists/blns depth=1 umask=000
   become: yes
 
 
@@ -38,7 +38,7 @@
   become: yes
 
 - name: Pull
-  git: repo=https://github.com/swisskyrepo/PayloadsAllTheThings.git dest=/opt/fuzzlists/patt depth=1 umask=000  mode=0644
+  git: repo=https://github.com/swisskyrepo/PayloadsAllTheThings.git dest=/opt/fuzzlists/patt depth=1 umask=000
   become: yes
 
 # seclists
