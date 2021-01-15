@@ -1,6 +1,6 @@
 ---
 - name: Check if already installed
-  command: ls -alh /home/$USER/.cargo/env
+  command: ls -alh ~/.cargo/env
   register: is_installed
   failed_when: is_installed.rc > 2
   changed_when: no

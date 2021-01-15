@@ -40,13 +40,14 @@
 
 - name: Add gobins to PATH
   lineinfile:
-    path: ~/.bashrc
+    path: "~/.bashrc"
     line: "export PATH=~/go/bin:$PATH"
+    regexp: "PATH=~\/go\/bin"
   become: no
 
 - name: Alias vi to vim (privileged)
   lineinfile:
-    path: ~/.bashrc
+    path: /root/.bashrc
     line: "alias vi=vim"
 
 - name: Alias vi to vim (unprivileged)
@@ -56,7 +57,7 @@
   become: no
 
 - name: Check if already installed
-  command: ls -alh /home/$USER/go/bin/cgasm
+  command: ls -alh ~/go/bin/cgasm
   register: is_installed
   failed_when: is_installed.rc > 2
   changed_when: no
@@ -70,7 +71,7 @@
     - skip_ansible_lint
 
 - name: Check if already installed
-  command: ls -alh /home/$USER/go/bin/glugger
+  command: ls -alh ~/go/bin/glugger
   register: is_installed
   failed_when: is_installed.rc > 2
   changed_when: no
