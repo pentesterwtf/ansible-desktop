@@ -25,7 +25,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get -y update
-          sudo apt-get install podman -y
+          sudo apt-get install podman python3-pip libssl-dev -y
+          sudo  python3 -m pip install "molecule[ansible,lint,podman]"
       - name: Test with molecule
         run: |
           molecule test
