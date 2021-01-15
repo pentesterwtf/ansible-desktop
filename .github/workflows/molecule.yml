@@ -22,7 +22,4 @@ jobs:
           sudo  python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
-          pwd
-          ls -alh .
-          ls -alh molecule/default/
           molecule test
