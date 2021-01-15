@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: molecule_demo
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
