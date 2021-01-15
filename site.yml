@@ -8,7 +8,6 @@
     - common
     - afl
     - bazel
-    - docker
     - dotnet
     - exploitdb
     - floss

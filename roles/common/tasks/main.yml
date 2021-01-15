@@ -4,11 +4,17 @@
     state: started
     name: sshd
     enabled: yes
+  # This is used as a workaround for our test harness using Docker
+  # This way we can test quickly and efficiently, instead of spinning up a VM every time
+  when: testing is undefined
 
 - name: Disable firewalld
   service:
     name: firewalld
     enabled: no
+  # This is also ignored when testing in Docker
+  when: testing is undefined
+
 
 - name: Install common
   dnf: 

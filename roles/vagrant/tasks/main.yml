@@ -1,44 +1,24 @@
 ---
 - name: Install common
   dnf:
-    name: ['libvirt-devel', 'git',
+    name: ['git',
  'gcc', 'gcc-c++', '@virtualization', 'zlib-devel', 'awscli', 'ruby-devel', 
 'qemu', 'libvirt', 'libvirt-devel', 'rubygem-ruby-libvirt', 'libxslt-devel', 
-'libxml2-devel', 'libvirt-devel', 'libguestfs-tools-c', 'libxslt-devel', 
-'libxml2-devel', 'libvirt-devel', 'libguestfs-tools-c']
-
-# Workaround - Due to https://github.com/vagrant-libvirt/vagrant-libvirt/issues/1031
-- name: install vagrant
-  dnf:
-    name: vagrant
-    state: present
-
+'libxml2-devel', 'libguestfs-tools-c', 'make', 'vagrant' ,'vagrant-libvirt' ]
 # Populate list of plugins installed for vagrant
 - name: check if vagrant plugins are installed
   shell: vagrant plugin list
   become: no
   register: vagrant_plugins
   changed_when: False
-
-# vagrant-digitalocean
-- name: Install vagrant-digitalocean plugin
-  shell: vagrant plugin install vagrant-digitalocean
-  become: no
-  when: '"vagrant-digitalocean" not in vagrant_plugins.stdout'
-
-# vagrant-libvirt
-- name: Install vagrant-libvirt plugin
-  shell: vagrant plugin install vagrant-libvirt
-  become: no
-  when: '"vagrant-libvirt" not in vagrant_plugins.stdout'
-
 # Fedora build of vagrant does not include winrm specifics
+# Turns out the handy 'VAGRANT_DISABLE_STRICT_DEPENDENCY_ENFORCEMENT=1' means we can ignore some of these dependancy issues
 - name: Install vagrant winrm 
-  shell: vagrant plugin install winrm
+  shell: VAGRANT_DISABLE_STRICT_DEPENDENCY_ENFORCEMENT=1 vagrant plugin install winrm
   become: no
   when: '"winrm" not in vagrant_plugins.stdout'
 
 - name: Install vagrant winrm-elevated
-  shell: vagrant plugin install winrm-elevated
+  shell: VAGRANT_DISABLE_STRICT_DEPENDENCY_ENFORCEMENT=1 vagrant plugin install winrm-elevated
   become: no
   when: '"winrm-elevated" not in vagrant_plugins.stdout'

@@ -22,7 +22,6 @@ Installs the following:
 
 * afl (http://lcamtuf.coredump.cx/afl/)
 * radamsa (https://github.com/aoh/radamsa)
-* Moby (Docker - https://github.com/moby/moby)
 * packer (https://www.packer.io/)
 * terraform (https://www.terraform.io/)
   * terraform-inventory (https://github.com/adammck/terraform-inventory)

@@ -1,17 +1,5 @@
 ---
-- name: Install prereqs
+- name: Install
   dnf: 
-    name: ['wget', 'git', 'make', 'gcc']
+    name: ['radamsa']
 
-- name: Download
-  git:
-    repo: https://gitlab.com/akihe/radamsa.git
-    dest: /usr/src/radamsa
-  register: u
-
-- name: Compile and install
-  command: " {{ item }} chdir=/usr/src/radamsa"
-  with_items:
-    - make OFLAGS=-O1
-    - make install
-  when: u.changed

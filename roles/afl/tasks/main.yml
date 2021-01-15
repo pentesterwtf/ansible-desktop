@@ -19,4 +19,6 @@
 
 - name: core deumps plz
   shell: echo core > /proc/sys/kernel/core_pattern
-  when: u.changed
+  # "testing" is what we use when testing the playbook with end to end
+  # when it's being 'tested'. it's in a docker container and /proc/sys is read-only
+  when: u.changed and testing is undefined
