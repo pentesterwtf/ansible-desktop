@@ -1,0 +1,10 @@
+---
+# This is used as a workaround for certain tests
+- name: Set testing fact
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Create 'testing' file
+    file: 
+      path: "/tmp/test_file"
+      state: touch

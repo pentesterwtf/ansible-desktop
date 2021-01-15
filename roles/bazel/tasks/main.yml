@@ -1,10 +1,10 @@
 ---
 - name: Install common
-  dnf: 
+  dnf:
     name: ['dnf-plugins-core']
 
 - name: Enable bazel
-  shell: dnf copr enable vbatts/bazel -y
+  command: dnf copr enable vbatts/bazel -y
   changed_when: no
   args:
     warn: false

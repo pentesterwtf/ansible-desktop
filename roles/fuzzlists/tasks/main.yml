@@ -3,18 +3,18 @@
 # All go under /opt/fuzzlists
 
 - name: Create folder
-  file: dest=/opt/fuzzlists state=directory
+  file: dest=/opt/fuzzlists state=directory  mode=0644
   become: yes
- 
+
 # Intruder payloads, line seperated payloads for HTTP
 # https://github.com/1N3/IntruderPayloads.git
 
 - name: Create folder for IN3/IntruderPayloads
-  file: dest=/opt/fuzzlists/in3 state=directory
+  file: dest=/opt/fuzzlists/in3 state=directory  mode=0644
   become: yes
 
 - name: Pull
-  git: repo=https://github.com/1N3/IntruderPayloads.git dest=/opt/fuzzlists/in3  depth=1 umask=000 
+  git: repo=https://github.com/1N3/IntruderPayloads.git dest=/opt/fuzzlists/in3  depth=1 umask=000  mode=0644
   become: yes
 
 
@@ -22,11 +22,11 @@
 # https://github.com/minimaxir/big-list-of-naughty-strings.git
 
 - name: Create folder for blns
-  file: dest=/opt/fuzzlists/blns state=directory
+  file: dest=/opt/fuzzlists/blns state=directory  mode=0644
   become: yes
 
 - name: Pull
-  git: repo=https://github.com/minimaxir/big-list-of-naughty-strings.git dest=/opt/fuzzlists/blns depth=1 umask=000 
+  git: repo=https://github.com/minimaxir/big-list-of-naughty-strings.git dest=/opt/fuzzlists/blns depth=1 umask=000  mode=0644
   become: yes
 
 
@@ -34,17 +34,16 @@
 # https://github.com/swisskyrepo/PayloadsAllTheThings.git
 
 - name: Create folder for patt
-  file: dest=/opt/fuzzlists/patt state=directory
+  file: dest=/opt/fuzzlists/patt state=directory  mode=0644
   become: yes
 
 - name: Pull
-  git: repo=https://github.com/swisskyrepo/PayloadsAllTheThings.git dest=/opt/fuzzlists/patt depth=1 umask=000 
+  git: repo=https://github.com/swisskyrepo/PayloadsAllTheThings.git dest=/opt/fuzzlists/patt depth=1 umask=000  mode=0644
   become: yes
 
 # seclists
 # https://github.com/danielmiessler/SecLists.git
 
 - name: Pull
-  git: repo=https://github.com/danielmiessler/SecLists.git dest=/opt/fuzzlists/seclists depth=1 umask=000 
+  git: repo=https://github.com/danielmiessler/SecLists.git dest=/opt/fuzzlists/seclists depth=1 umask=000
   become: yes
-

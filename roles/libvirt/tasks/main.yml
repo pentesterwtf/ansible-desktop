@@ -1,6 +1,6 @@
 ---
 - name: Install libvirt/virt-manager
-  dnf: 
+  dnf:
     name: ['libvirt-devel', '@virtualization']
 
 - name: Add user to libvirt group
@@ -8,5 +8,4 @@
     name: "{{ lookup('env','USERNAME') }}"
     groups: libvirt
     append: yes
-  when: "{{ lookup('env','USERNAME') | length > 0}}"
-
+  when: "lookup('env','USERNAME') | length > 0"

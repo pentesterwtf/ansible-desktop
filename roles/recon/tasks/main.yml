@@ -3,11 +3,11 @@
 # https://github.com/Mr-Un1k0d3r/CatMyFish
 
 - name: Create folder for CatMyfish
-  file: dest=/opt/CatMyFish state=directory
+  file: dest=/opt/CatMyFish state=directory mode=0644
 
 - name: Pull CatMyFish
   git: repo=https://github.com/Mr-Un1k0d3r/CatMyFish dest=/opt/CatMyFish umask=000 depth=1 update=no
-  
+
 - name: Set interpreter for catmyfish
   lineinfile: path=/opt/CatMyFish/CatMyPhish.py  line="#!/usr/bin/env python" insertbefore="BOF"
 
@@ -26,11 +26,11 @@
 # https://github.com/minisllc/domainhunter
 
 - name: Create folder for Domainhunter
-  file: dest=/opt/domainhunter state=directory
+  file: dest=/opt/domainhunter state=directory  mode=0644
 
 - name: Pull Domainhunter
   git: repo=https://github.com/minisllc/domainhunter.git dest=/opt/domainhunter umask=000 depth=1 update=no
-  
+
 - name: Symlink DomainHunter
   file:
     src: /opt/domainhunter/domainhunter.py
@@ -46,10 +46,10 @@
 # https://github.com/mdsecactivebreach/Chameleon.git
 
 - name: Create folder
-  file: dest=/opt/chameleon state=directory
+  file: dest=/opt/chameleon state=directory  mode=0644
 
 - name: Pull
-  git: repo=https://github.com/mdsecactivebreach/Chameleon.git dest=/opt/chameleon umask=000 depth=1 update=no
+  git: repo=https://github.com/mdsecactivebreach/Chameleon.git dest=/opt/chameleon umask=000 depth=1 update=no  mode=0644
 
 - name: Set interpreter
   lineinfile: path=/opt/chameleon/chameleon.py  line="#!/usr/bin/env python" insertbefore="BOF"
@@ -74,7 +74,9 @@
 
 # https://github.com/robertdavidgraham/masscan
 
-- dnf: name=libpcap-devel
+- name: Instal libpcap for masscan
+  dnf:
+    name: ['libpcap-devel']
 
 - name: Check if already installed
   command: ls -alh /usr/bin/masscan
@@ -89,5 +91,3 @@
 - name: install
   shell: cd /usr/src/masscan && make -j && make install
   when: is_installed.rc == 2
-
-  

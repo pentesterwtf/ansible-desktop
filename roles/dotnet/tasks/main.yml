@@ -22,8 +22,5 @@
     description: Mono repos
 
 - name: Install dotnet
-  dnf: 
+  dnf:
     name: ['dotnet-sdk-2.2', 'mono-complete']
-
-
-

@@ -1,5 +1,5 @@
 ---
-- name: Copy GPG key 
+- name: Copy GPG key
   copy:
     src: files/RPM-GPG-KEY-Metasploit
     dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-Metasploit

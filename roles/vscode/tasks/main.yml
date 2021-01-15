@@ -7,7 +7,7 @@
     gpgcheck: yes
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
 
-- name: Install VS Code
+- name: Install VSCode
   dnf:
     name: code
     state: latest

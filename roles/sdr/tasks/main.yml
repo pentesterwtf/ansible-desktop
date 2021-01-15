@@ -35,4 +35,3 @@
 - name: make, build, install
   shell: autoreconf -fvi && ./configure && make
   when: is_installed.rc == 2
-

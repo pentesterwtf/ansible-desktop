@@ -6,7 +6,7 @@
   changed_when: no
 
 - name: Install
-  unarchive: src=https://releases.hashicorp.com/terraform/0.11.1/terraform_0.11.1_linux_amd64.zip dest=/usr/bin/  copy=no
+  unarchive: src=https://releases.hashicorp.com/terraform/0.11.1/terraform_0.11.1_linux_amd64.zip dest=/usr/bin/ copy=no  mode=0644
   when: is_installed.rc == 2
 
 - name: Check if already installed
@@ -16,6 +16,9 @@
   changed_when: no
 
 - name: Install
-  unarchive: src=https://github.com/adammck/terraform-inventory/releases/download/v0.7-pre/terraform-inventory_v0.7-pre_linux_amd64.zip dest=/usr/bin/  copy=no
+  unarchive:
+    src: https://github.com/adammck/terraform-inventory/releases/download/v0.7-pre/terraform-inventory_v0.7-pre_linux_amd64.zip
+    dest: /usr/bin/
+    copy: no
+    mode: 0644
   when: is_installed.rc == 2
-
