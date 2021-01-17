@@ -1,0 +1,3 @@
+---
+yumRepoUrl: https://packages.microsoft.com/yumrepos/vscode
+yumRepoGpgKey: https://packages.microsoft.com/keys/microsoft.asc

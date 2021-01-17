@@ -1,14 +1,15 @@
 ---
-- name: Add vscode repo
+- name: Ensure VSCode repo exists
   yum_repository:
     name: vscode
     description: Visual Studio Code repo
-    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    baseurl: " {{ yumRepoUrl }} "
+    gpgkey: " {{ yumRepoGpgKey }} "
     gpgcheck: yes
-    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+  tags:
+    - molecule-idempotence-notest
 
 - name: Install VSCode
   dnf:
     name: code
     state: installed
-    update_cache: yes
