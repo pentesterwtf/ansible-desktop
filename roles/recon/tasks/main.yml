@@ -68,10 +68,6 @@
     path: /opt/chameleon/chameleon.py
     mode: 0755
 
-# git fingerprint / https://blog.paradoxis.nl/fingerprinting-web-servers-with-git-e93be98b236 
-- name: Install python things
-  pip: name=git-fingerprint executable=pip-3
-
 # https://github.com/robertdavidgraham/masscan
 
 - name: Instal libpcap for masscan

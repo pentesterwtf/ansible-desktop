@@ -38,24 +38,6 @@
   dnf:
     name: ['google-chrome-stable']
 
-- name: Add gobins to PATH
-  lineinfile:
-    path: "~/.bashrc"
-    line: "export PATH=~/go/bin:$PATH"
-    regexp: "PATH=~\/go\/bin"
-  become: no
-
-- name: Alias vi to vim (privileged)
-  lineinfile:
-    path: /root/.bashrc
-    line: "alias vi=vim"
-
-- name: Alias vi to vim (unprivileged)
-  lineinfile:
-    path: ~/.bashrc
-    line: "alias vi=vim"
-  become: no
-
 - name: Check if already installed
   command: ls -alh ~/go/bin/cgasm
   register: is_installed
