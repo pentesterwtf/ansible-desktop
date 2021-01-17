@@ -1,5 +1,5 @@
 ---
-name: vscode test
+name: vscode
 on:
   push:
   pull_request:
