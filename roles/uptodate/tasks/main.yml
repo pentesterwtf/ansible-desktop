@@ -1,5 +1,12 @@
 ---
+# We turn off idempotence checks for this package update
+# as a package update is at some point, going to make a change
+#
+# We obviously don't want an upstream change *as we're testing*
+# to cause a failed build.
 - name: upgrade all packages
   dnf:
     name: "*"
     state: latest
+  tags:
+    - molecule-idempotence-notest
