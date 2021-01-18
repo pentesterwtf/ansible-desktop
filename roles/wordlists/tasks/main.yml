@@ -31,3 +31,9 @@
     repo: https://github.com/danielmiessler/SecLists.git
     dest: "{{ wordlistPath }}/seclists"
     version: 9f4d672e98a837fb1f3d59095df36b63af6987d1
+
+- name: exploitdb
+  git:
+    repo: https://github.com/offensive-security/exploit-database.git
+    dest: "{{ wordlistPath }}/exploit-database"
+    version: 969e7d6c903569251340738f23c4d02a631607d1

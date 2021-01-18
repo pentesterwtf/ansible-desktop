@@ -9,7 +9,6 @@
     - afl
     - bazel
     - dotnet
-    - exploitdb
     - floss
     - kubectl
     - libvirt
