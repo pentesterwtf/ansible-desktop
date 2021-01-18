@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include terraform"
+    - name: "Include hashicorp"
       include_role:
-        name: "terraform"
+        name: "hashicorp"

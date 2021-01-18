@@ -13,14 +13,11 @@
     - kubectl
     - libvirt
     - molecule
-    - packer
     - radamsa
     - metasploit
     - rust
     - recon
     - sdr
-    - terraform
-    - vault
-    - vagrant
+    - hashicorp
     - vscode
     - wordlists
