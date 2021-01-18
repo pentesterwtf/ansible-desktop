@@ -1,0 +1,33 @@
+---
+# Fuzzing lists
+# All go under /opt/wordlists
+
+- name: ensure wordlists folder exists
+  file:
+    dest: "{{ wordlistPath }}"
+    state: directory
+    mode: 0644
+
+- name: Intruder payloads
+  git:
+    repo: https://github.com/1N3/IntruderPayloads.git
+    dest:  "{{ wordlistPath }}/in3"
+    depth: 1
+
+- name: big list of naughty strings
+  git:
+    repo: https://github.com/minimaxir/big-list-of-naughty-strings.git
+    dest: "{{ wordlistPath }}/blns"
+    depth: 1
+
+- name: Payload all the things
+  git:
+    repo: https://github.com/swisskyrepo/PayloadsAllTheThings.git
+    dest: "{{ wordlistPath }}/patt"
+    depth: 1
+
+- name: seclists
+  git:
+    repo: https://github.com/danielmiessler/SecLists.git
+    dest: "{{ wordlistPath }}/seclists"
+    depth: 1
