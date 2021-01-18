@@ -35,7 +35,6 @@ Installs the following:
   * Liquid DSP (https://github.com/jgaeddert/liquid-dsp)
   * Universal Radio Hacker (https://github.com/jopohl/urh)
 * awscli (https://aws.amazon.com/cli/)
-* Veles (https://veles.io/)
 
 These are reflected under roles/
 
