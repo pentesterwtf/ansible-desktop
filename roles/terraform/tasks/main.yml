@@ -1,26 +1,33 @@
 ---
+- name: Ensure dependencies installed
+  dnf:
+    name: ['unzip']
+    state: present
+
 - name: Check if already installed
   command: ls -alh /usr/bin/terraform
   register: is_installed
   failed_when: is_installed.rc > 2
   changed_when: no
 
-- name: Install
-  unarchive: src=https://releases.hashicorp.com/terraform/0.14.4/terraform_0.14.4_linux_amd64.zip dest=/usr/bin/ copy=no  mode=0644
+- name: Install Terraform
+  unarchive:
+    src: " {{ terraformUrl }} "
+    dest: /usr/bin/
+    copy: no
+    mode: 0755
   when: is_installed.rc == 2
-
-
 
 - name: Install terraform inventory
   unarchive:
-    src: https://github.com/adammck/terraform-inventory/releases/download/v0.7-pre/terraform-inventory_v0.7-pre_linux_amd64.zip
+    src: " {{ terraformInventoryUrl }} "
     dest: /usr/bin/
     copy: no
-    mode: 0644
+    mode: 0755
   when: is_installed.rc == 2
 
 - name: Check if terraform-libvirt installed
-  command: ls -alh ~/.terraform.d/plugins/registry.terraform.io/hashicorp/libvirt/0.6.3/linux_amd64/terraform-provider-libvirt
+  command: ls -alh " ~/{{ terraformProviderPath }}/terraform-provider-libvirt "
   register: is_installed
   failed_when: is_installed.rc > 2
   changed_when: no
@@ -28,7 +35,7 @@
 
 - name: Create a directory if it does not exist
   ansible.builtin.file:
-    path: ~/.terraform.d/plugins/registry.terraform.io/hashicorp/libvirt/0.6.3/linux_amd64/
+    path: ~/{{ terraformProviderPath }}
     state: directory
     mode: '0755'
     recurse: true
@@ -37,9 +44,9 @@
 
 - name: Install terraform-libvirt provider
   unarchive:
-    src: "https://github.com/dmacvicar/terraform-provider-libvirt/releases/download/v0.6.3/terraform-provider-libvirt-0.6.3+git.1604843676.67f4f2aa.Fedora_32.x86_64.tar.gz" # noqa 204
-    dest: ~/.terraform.d/plugins/registry.terraform.io/hashicorp/libvirt/0.6.3/linux_amd64/
-    copy: no
+    src: " {{ terraformProviderUrl }} "
+    dest: ~/{{ terraformProviderPath }}
+    remote_src: yes
     mode: 0755
   when: is_installed.rc == 2
   become: no
