@@ -48,10 +48,17 @@
     name: Australia/Melbourne
 
 - name: ensure /usr/src exists
-  file: path=/usr/src state=directory mode=0644
+  file:
+    path: /usr/src
+    state: directory
+    mode: 0644
 
 - name: clone bash_it
-  git: repo=https://github.com/Bash-it/bash-it.git dest=/usr/src/Bash_it depth=1
+  git:
+    repo: https://github.com/Bash-it/bash-it.git
+    dest: /usr/src/Bash_it
+    depth: 1
+    version: 79df5ffc3c9189064a52566147e6181221995f0d
 
 - name: bash_it check (root)
   command: ls -alh /root/.bash_it
