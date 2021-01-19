@@ -1,6 +1,0 @@
----
-  - name: Pull FLOSS
-    get_url:
-      url: https://s3.amazonaws.com/build-artifacts.floss.flare.fireeye.com/travis/linux/dist/floss
-      dest: /usr/bin/floss
-      mode: 0755

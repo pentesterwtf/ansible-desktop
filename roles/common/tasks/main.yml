@@ -25,7 +25,7 @@
   dnf:
     name: ['git', 'git-lfs',  'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'nmap',
     'screen', 'python-pip', 'vim-enhanced', 'python3-libselinux', 'zlib-devel',
-    'golang', 'aria2', 'binwalk', 'ruby-devel', 'remmina',
+    'golang', 'aria2', 'ruby-devel', 'remmina',
     'fedora-workstation-repositories']
 
 - name: Enable Google Chrome in Fedora-Workstation-Repositories

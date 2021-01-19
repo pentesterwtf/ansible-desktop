@@ -1,0 +1,4 @@
+---
+flossUrl: https://s3.amazonaws.com/build-artifacts.floss.flare.fireeye.com/travis/linux/dist/floss
+ghidraUrl: https://ghidra-sre.org/ghidra_9.2.1_PUBLIC_20201215.zip
+ghidraPath: /opt/ghidra_9.2.1_PUBLIC

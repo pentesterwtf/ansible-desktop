@@ -1,0 +1,18 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  vars:
+    # The front page of ghidra-sre.org has a SHA hash of the latest release
+    # We use this to figure out if we're running latest as part of the verify script
+    latestCheckHash: cfaeb2b5938dec90388e936f63600ad345d41b509ffed4727142ba9ed44cb5e8
+    latestCheckUrl: https://ghidra-sre.org
+  tasks:
+  - name: Ensure we're grabbing latest
+    uri:
+      url: "{{ latestCheckUrl }}"
+      return_content: yes
+    register: this
+    failed_when: "'{latestCheckHash}}' not in this.content"

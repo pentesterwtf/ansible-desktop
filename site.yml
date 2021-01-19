@@ -8,7 +8,6 @@
     - common
     - bazel
     - dotnet
-    - floss
     - fuzzing
     - kubectl
     - libvirt
@@ -16,6 +15,7 @@
     - metasploit
     - rust
     - recon
+    - reveng
     - sdr
     - hashicorp
     - vscode
