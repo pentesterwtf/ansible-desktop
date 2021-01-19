@@ -8,9 +8,9 @@
     - common
     - bazel
     - dotnet
+    - desktop
     - fuzzing
     - kubectl
-    - libvirt
     - molecule
     - metasploit
     - rust

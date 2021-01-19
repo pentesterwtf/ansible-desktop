@@ -1,0 +1,13 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: podman
+platforms:
+  - name: instance
+    image: docker.io/fedora:33
+    pre_build_image: true
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

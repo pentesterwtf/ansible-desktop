@@ -1,0 +1,27 @@
+---
+- name: Install common
+  dnf:
+    name: ['screen', 'vim-enhanced', 'aria2', 'remmina',
+    'fedora-workstation-repositories']
+
+- name: Enable Google Chrome in Fedora-Workstation-Repositories
+  dnf:
+    name: google-chrome
+    enablerepo: google-chrome
+    state: present
+
+- name: Install Chrome
+  dnf:
+    name: ['google-chrome-stable']
+
+- name: Enable Signal Desktop Copr Repository
+  yum_repository:
+    name: signal
+    description: Copr repo for Signal-Desktop owned by luminoso
+    baseurl: https://download.copr.fedorainfracloud.org/results/luminoso/Signal-Desktop/fedora-$releasever-$basearch/
+    gpgcheck: yes
+    gpgkey: https://download.copr.fedorainfracloud.org/results/luminoso/Signal-Desktop/pubkey.gpg
+
+- name: Install signal-desktop
+  dnf:
+    name: ['signal-desktop']

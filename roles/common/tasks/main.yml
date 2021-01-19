@@ -1,8 +1,4 @@
 ---
-- name: Register testing file
-  stat:
-    path: "/tmp/test_file"
-  register: testing
 
 - name: enable SSH
   systemd:
@@ -11,32 +7,24 @@
     enabled: yes
   # This is used as a workaround for our test harness using Docker
   # This way we can test quickly and efficiently, instead of spinning up a VM every time
-  when: not testing.stat.exists
+  tags:
+    - molecule-notest
 
 - name: Disable firewalld
   service:
     name: firewalld
     enabled: no
-  # This is also ignored when testing in Docker
-  when: not testing.stat.exists
+  # This is used as a workaround for our test harness using Docker
+  # This way we can test quickly and efficiently, instead of spinning up a VM every time
+  tags:
+    - molecule-notest
 
 
 - name: Install common
   dnf:
-    name: ['git', 'git-lfs',  'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'nmap',
+    name: ['git', 'git-lfs',  'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'ripgrep',
     'screen', 'python-pip', 'vim-enhanced', 'python3-libselinux', 'zlib-devel',
-    'golang', 'aria2', 'ruby-devel', 'remmina',
-    'fedora-workstation-repositories']
-
-- name: Enable Google Chrome in Fedora-Workstation-Repositories
-  dnf:
-    name: google-chrome
-    enablerepo: google-chrome
-    state: present
-
-- name: Install Chrome
-  dnf:
-    name: ['google-chrome-stable']
+    'golang', 'ruby-devel', 'fedora-workstation-repositories']
 
 - name: Check if already installed
   command: ls -alh ~/go/bin/cgasm
@@ -51,18 +39,6 @@
   when: is_installed.rc == 2
   tags: # We use this because we *need* a shell command here
     - skip_ansible_lint
-
-- name: Check if already installed
-  command: ls -alh ~/go/bin/glugger
-  register: is_installed
-  failed_when: is_installed.rc > 2
-  changed_when: no
-  become: no
-
-- name: Install glugger
-  command: go get github.com/zxsecurity/glugger
-  become: no
-  when: is_installed.rc == 2
 
 - name: Install python things
   pip:
