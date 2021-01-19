@@ -10,7 +10,6 @@
     - dotnet
     - desktop
     - fuzzing
-    - kubectl
     - molecule
     - metasploit
     - rust
