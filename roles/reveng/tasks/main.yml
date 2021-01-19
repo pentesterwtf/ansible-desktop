@@ -14,12 +14,13 @@
     path: "{{ ghidraPath }}"
     mode: 0755
     state: directory
- 
+
 - name: pull and extract ghidra
   unarchive:
     src: " {{ ghidraUrl }} "
     dest: "/opt/"
     remote_src: yes
+    mode: 0755
 
 - name: Create a symbolic link for Ghidra
   ansible.builtin.file:
