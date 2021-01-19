@@ -6,14 +6,13 @@
   roles:
     - uptodate
     - common
-    - afl
     - bazel
     - dotnet
     - floss
+    - fuzzing
     - kubectl
     - libvirt
     - molecule
-    - radamsa
     - metasploit
     - rust
     - recon
