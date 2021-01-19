@@ -1,5 +1,5 @@
 ---
-name: vscode
+name: dotnet
 on:
   push:
   pull_request:
@@ -22,4 +22,4 @@ jobs:
           sudo  python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
-          cd roles/vscode && molecule test
+          cd roles/dotnet && molecule test
