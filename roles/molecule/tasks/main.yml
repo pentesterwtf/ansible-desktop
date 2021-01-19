@@ -1,5 +1,0 @@
----
-- name: Install molecule
-  pip:
-    name: ['molecule[podman]', 'molecule[lint]']
-    state: present

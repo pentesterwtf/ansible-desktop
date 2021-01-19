@@ -6,13 +6,11 @@
   roles:
     - uptodate
     - common
-    - bazel
     - dotnet
     - desktop
+    - dev
     - fuzzing
-    - molecule
     - metasploit
-    - rust
     - recon
     - reveng
     - sdr

@@ -19,12 +19,11 @@
   tags:
     - molecule-notest
 
-
 - name: Install common
   dnf:
-    name: ['git', 'git-lfs',  'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'ripgrep',
+    name: ['git', 'git-lfs', 'kernel-devel', 'ripgrep',
     'screen', 'python-pip', 'vim-enhanced', 'python3-libselinux', 'zlib-devel',
-    'golang', 'ruby-devel', 'fedora-workstation-repositories']
+    'golang']
 
 - name: Check if already installed
   command: ls -alh ~/go/bin/cgasm
@@ -95,54 +94,12 @@
   tags: # We use this because we *need* a shell command here
     - skip_ansible_lint
 
-- name: ensure .vim exists (non-root)
-  file:
-    path: ~/.vim
-    state: directory
-    mode: 0644
-  become: no
-
-- name: clone vim-polyglot
-  git:
-    repo: https://github.com/sheerun/vim-polyglot.git
-    dest: /usr/src/vim-polyglot
-    depth: 1
-  register: vimpolyglot
-
-- name: vim-polyglot (non-root)
-  shell: "{{ item }}"
-  with_items:
-    - mkdir -p ~/.vim/pack/plugins/start/vim-polyglot
-    - cp -r /usr/src/vim-polyglot/* ~/.vim/
-  when: vimpolyglot.changed
-  become: no
-  tags: # We use this because we *need* a shell command here
-    - skip_ansible_lint
-
-- name: ensure .vim exists (root)
-  file:
-    path: ~/.vim
-    state: directory
-    mode: 0644
-
-- name: vim-polyglot (root)
-  shell: "{{ item }}"
-  with_items:
-    - mkdir -p ~/.vim/pack/plugins/start/vim-polyglot
-    - cp -r /usr/src/vim-polyglot/* ~/.vim/
-  when: vimpolyglot.changed
-  tags: # We use this because we *need* a shell command here
-    - skip_ansible_lint
-
 - name: screen dotfile
   copy:
     src: files/.screenrc
     dest: ~/.screenrc
     mode: 0644
   become: no
-
-- name: install nodejs
-  dnf: name="nodejs"
 
 - name: vte config (regular user)
   lineinfile:
