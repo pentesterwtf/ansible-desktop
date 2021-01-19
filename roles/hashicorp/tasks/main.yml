@@ -4,6 +4,17 @@
     name: ['unzip', 'jq']
     state: present
 
+- name: Install libvirt/virt-manager
+  dnf:
+    name: ['libvirt-devel', '@virtualization']
+
+- name: Add user to libvirt group
+  user:
+    name: "{{ lookup('env','USERNAME') }}"
+    groups: libvirt
+    append: yes
+  when: "lookup('env','USERNAME') | length > 0"
+
 - name: Check if already installed
   command: ls -alh /usr/bin/terraform
   register: is_installed

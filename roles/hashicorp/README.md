@@ -10,6 +10,8 @@ Installs the following:
   * Inventory plugin on Fedora 33+
 * Packer
 * Vagrant
+  * Installs with libvirt support
+* Libvirt
 
 License
 -------
