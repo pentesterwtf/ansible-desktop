@@ -15,4 +15,4 @@
       url: "{{ latestCheckUrl }}"
       return_content: yes
     register: this
-    failed_when: "'{{latestCheckHash}}' not in this.content"
+    failed_when: "'{{ latestCheckHash }}' not in this.content"
