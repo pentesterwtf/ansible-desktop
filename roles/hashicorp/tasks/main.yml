@@ -1,0 +1,143 @@
+---
+- name: Ensure dependencies installed
+  dnf:
+    name: ['unzip', 'jq']
+    state: present
+
+- name: Install libvirt/virt-manager
+  dnf:
+    name: ['libvirt-devel', '@virtualization']
+
+- name: Add user to libvirt group
+  user:
+    name: "{{ lookup('env','USERNAME') }}"
+    groups: libvirt
+    append: yes
+  when: "lookup('env','USERNAME') | length > 0"
+
+- name: Check if already installed
+  command: ls -alh /usr/bin/terraform
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+
+- name: Install Terraform
+  unarchive:
+    src: " {{ terraformUrl }} "
+    dest: /usr/bin/
+    copy: no
+    mode: 0755
+  when: is_installed.rc == 2
+
+- name: Install terraform inventory
+  unarchive:
+    src: " {{ terraformInventoryUrl }} "
+    dest: /usr/bin/
+    copy: no
+    mode: 0755
+  when: is_installed.rc == 2
+
+- name: Check if terraform-libvirt installed
+  command: ls -alh " ~/{{ terraformProviderPath }}/terraform-provider-libvirt "
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+  become: no
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: ~/{{ terraformProviderPath }}
+    state: directory
+    mode: '0755'
+    recurse: true
+  when: is_installed.rc == 2
+  become: no
+
+- name: Install terraform-libvirt provider
+  unarchive:
+    src: " {{ terraformProviderUrl }} "
+    dest: ~/{{ terraformProviderPath }}
+    remote_src: yes
+    mode: 0755
+  when: is_installed.rc == 2
+  become: no
+
+- name: Get latest build of packer
+  shell: >
+    set -o pipefail &&
+    curl -s https://checkpoint-api.hashicorp.com/v1/check/packer
+    | jq -rc '.current_download_url + "packer_" +
+     .current_version + "_linux_amd64.zip"'
+  register: latest_url
+  changed_when: no
+  # Needed due to get_url module not doing enough here, slash dodgy sed requirements
+  args:
+    warn: false
+  tags:
+    - skip_ansible_lint
+
+- name: Check if already installed
+  command: ls -alh /usr/local/bin/packer
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+
+- name: Version Check
+  shell: set -o pipefail && packer version | grep "out of date"
+  changed_when: no
+  register: newbuild
+  failed_when: no
+  when: is_installed.rc == 0
+
+- name: Install packer
+  unarchive:
+    src: " {{ latest_url.stdout }} "
+    dest: /usr/local/bin/
+    copy: no
+    mode: 0644
+  when: (is_installed.rc == 2) or (newbuild.rc == 130)
+
+- name: Install prereqs for vagrant
+  dnf:
+    name: ['git',
+'gcc', 'gcc-c++', '@virtualization', 'zlib-devel', 'awscli', 'ruby-devel',
+'qemu', 'libvirt', 'libvirt-devel', 'rubygem-ruby-libvirt', 'libxslt-devel',
+'libxml2-devel', 'libguestfs-tools-c', 'make', 'vagrant', 'vagrant-libvirt']
+# Populate list of plugins installed for vagrant
+- name: check if vagrant plugins are installed
+  shell: vagrant plugin list
+  become: no
+  register: vagrant_plugins
+  changed_when: False
+  tags: # We use this because we *need* a shell command here
+    - skip_ansible_lint
+
+# Fedora build of vagrant does not include winrm specifics
+# Turns out the handy 'VAGRANT_DISABLE_STRICT_DEPENDENCY_ENFORCEMENT=1' means we can ignore some of these dependancy issues
+- name: Install vagrant winrm
+  shell: VAGRANT_DISABLE_STRICT_DEPENDENCY_ENFORCEMENT=1 vagrant plugin install winrm
+  become: no
+  when: '"winrm" not in vagrant_plugins.stdout'
+  tags: # We use this because we *need* a shell command here
+    - skip_ansible_lint
+
+- name: Install vagrant winrm-elevated
+  shell: VAGRANT_DISABLE_STRICT_DEPENDENCY_ENFORCEMENT=1 vagrant plugin install winrm-elevated
+  become: no
+  when: '"winrm-elevated" not in vagrant_plugins.stdout'
+  tags: # We use this because we *need* a shell command here
+    - skip_ansible_lint
+
+- name: Check if already installed
+  command: ls -alh /usr/bin/vault
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+
+- name: Install
+  unarchive:
+    src: https://releases.hashicorp.com/vault/0.9.1/vault_0.9.1_linux_amd64.zip
+    dest: /usr/bin/
+    copy: no
+    mode: 0755
+  when: is_installed.rc == 2

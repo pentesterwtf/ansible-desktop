@@ -1,0 +1,6 @@
+---
+- name: Compile and install afl
+  command: "chdir={{ aflPath }} {{ item }}"
+  with_items:
+    - make
+    - make install

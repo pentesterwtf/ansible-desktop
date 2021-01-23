@@ -1,0 +1,26 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name:  Test run gobuster # noqa 301
+    command:
+      cmd: ~/go/bin/gobuster
+    register: run_result
+    become: no
+  - name:  Test run ffuf # noqa 301
+    command:
+      cmd: ~/go/bin/ffuf -V
+    register: run_result
+    become: no
+  - name:  Test run nmap  # noqa 301
+    command:
+      cmd: nmap -V
+    register: run_result
+    become: no
+  - name:  Test run masscan # noqa 301
+    command:
+      cmd: masscan -p80 --echo
+    register: run_result

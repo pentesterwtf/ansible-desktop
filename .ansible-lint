@@ -1,6 +1,2 @@
 warn_list:
-- '302'  # Using command rather than an argument to e.g. file  
-- '305'  # Use shell only when shell functionality is required
 - '401'  # Git checkouts must contain explicit version
-- '403'  # Package installs should not use latest
-- '503'  # Tasks that run when changed should likely be handlers  

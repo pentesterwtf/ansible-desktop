@@ -1,0 +1,44 @@
+---
+# Fuzzing lists
+# All go under /opt/wordlists
+
+- name: Ensure we have git
+  dnf:
+    name: ['git']
+    state: installed
+
+- name: ensure wordlists folder exists
+  file:
+    dest: "{{ wordlistPath }}"
+    state: directory
+    mode: 0644
+
+- name: Intruder payloads
+  git:
+    repo: https://github.com/1N3/IntruderPayloads.git
+    dest:  "{{ wordlistPath }}/in3"
+    version: 478d96477607d328312b2ddbd9689ad1b9338f96
+
+- name: big list of naughty strings
+  git:
+    repo: https://github.com/minimaxir/big-list-of-naughty-strings.git
+    dest: "{{ wordlistPath }}/blns"
+    version: 894882e7d1f3f2383aa472fdce4a80b8cd256df4
+
+- name: Payload all the things
+  git:
+    repo: https://github.com/swisskyrepo/PayloadsAllTheThings.git
+    dest: "{{ wordlistPath }}/patt"
+    version: d4d2ba45c26a2578fd869b3148cf81fb82d9b438
+
+- name: seclists
+  git:
+    repo: https://github.com/danielmiessler/SecLists.git
+    dest: "{{ wordlistPath }}/seclists"
+    version: 9f4d672e98a837fb1f3d59095df36b63af6987d1
+
+- name: exploitdb
+  git:
+    repo: https://github.com/offensive-security/exploit-database.git
+    dest: "{{ wordlistPath }}/exploit-database"
+    version: 969e7d6c903569251340738f23c4d02a631607d1

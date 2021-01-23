@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include fuzzing"
+      include_role:
+        name: "fuzzing"

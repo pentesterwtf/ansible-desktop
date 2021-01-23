@@ -6,23 +6,11 @@
   roles:
     - uptodate
     - common
-    - afl
-    - bazel
     - dotnet
-    - exploitdb
-    - floss
-    - fuzzlists
-    - kubectl
-    - libvirt
-    - molecule
-    - packer
-    - radamsa
-    - metasploit
-    - rust
+    - desktop
+    - dev
+    - fuzzing
     - recon
-    - sdr
-    - terraform
-    - veles
-    - vault
-    - vagrant
+    - reveng
+    - hashicorp
     - vscode

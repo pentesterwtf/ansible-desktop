@@ -1,8 +1,4 @@
 ---
-- name: Register testing file
-  stat:
-    path: "/tmp/test_file"
-  register: testing
 
 - name: enable SSH
   systemd:
@@ -11,72 +7,39 @@
     enabled: yes
   # This is used as a workaround for our test harness using Docker
   # This way we can test quickly and efficiently, instead of spinning up a VM every time
-  when: not testing.stat.exists
+  tags:
+    - molecule-notest
 
 - name: Disable firewalld
   service:
     name: firewalld
     enabled: no
-  # This is also ignored when testing in Docker
-  when: not testing.stat.exists
-
+  # This is used as a workaround for our test harness using Docker
+  # This way we can test quickly and efficiently, instead of spinning up a VM every time
+  tags:
+    - molecule-notest
 
 - name: Install common
   dnf:
-    name: ['git', 'git-lfs',  'jq', 'gcc', 'gcc-c++', 'kernel-devel', 'nmap',
-    'screen', 'python-pip', 'vim-enhanced', 'python3-libselinux', 'zlib-devel',
-    'golang', 'aria2', 'binwalk', 'ruby-devel', 'remmina',
-    'fedora-workstation-repositories']
-
-- name: Enable Google Chrome in Fedora-Workstation-Repositories
-  dnf:
-    name: google-chrome
-    enablerepo: google-chrome
-    state: present
-
-- name: Install Chrome
-  dnf:
-    name: ['google-chrome-stable']
-
-- name: Check if already installed
-  command: ls -alh ~/go/bin/cgasm
-  register: is_installed
-  failed_when: is_installed.rc > 2
-  changed_when: no
-  become: no
-
-- name: Install cgasm
-  shell: go get github.com/bnagy/cgasm
-  become: no
-  when: is_installed.rc == 2
-  tags: # We use this because we *need* a shell command here
-    - skip_ansible_lint
-
-- name: Check if already installed
-  command: ls -alh ~/go/bin/glugger
-  register: is_installed
-  failed_when: is_installed.rc > 2
-  changed_when: no
-  become: no
-
-- name: Install glugger
-  command: go get github.com/zxsecurity/glugger
-  become: no
-  when: is_installed.rc == 2
-
-- name: Install python things
-  pip:
-    name: ['speedtest-cli', 'dnspython']
+    name: ['git', 'git-lfs', 'kernel-devel', 'ripgrep',
+    'screen', 'python-pip', 'vim-enhanced', 'python3-libselinux', 'zlib-devel']
 
 - name: Set time to AEST
   timezone:
     name: Australia/Melbourne
 
 - name: ensure /usr/src exists
-  file: path=/usr/src state=directory mode=0644
+  file:
+    path: /usr/src
+    state: directory
+    mode: 0644
 
 - name: clone bash_it
-  git: repo=https://github.com/Bash-it/bash-it.git dest=/usr/src/Bash_it depth=1
+  git:
+    repo: https://github.com/Bash-it/bash-it.git
+    dest: /usr/src/Bash_it
+    depth: 1
+    version: 79df5ffc3c9189064a52566147e6181221995f0d
 
 - name: bash_it check (root)
   command: ls -alh /root/.bash_it
@@ -119,54 +82,12 @@
   tags: # We use this because we *need* a shell command here
     - skip_ansible_lint
 
-- name: ensure .vim exists (non-root)
-  file:
-    path: ~/.vim
-    state: directory
-    mode: 0644
-  become: no
-
-- name: clone vim-polyglot
-  git:
-    repo: https://github.com/sheerun/vim-polyglot.git
-    dest: /usr/src/vim-polyglot
-    depth: 1
-  register: vimpolyglot
-
-- name: vim-polyglot (non-root)
-  shell: "{{ item }}"
-  with_items:
-    - mkdir -p ~/.vim/pack/plugins/start/vim-polyglot
-    - cp -r /usr/src/vim-polyglot/* ~/.vim/
-  when: vimpolyglot.changed
-  become: no
-  tags: # We use this because we *need* a shell command here
-    - skip_ansible_lint
-
-- name: ensure .vim exists (root)
-  file:
-    path: ~/.vim
-    state: directory
-    mode: 0644
-
-- name: vim-polyglot (root)
-  shell: "{{ item }}"
-  with_items:
-    - mkdir -p ~/.vim/pack/plugins/start/vim-polyglot
-    - cp -r /usr/src/vim-polyglot/* ~/.vim/
-  when: vimpolyglot.changed
-  tags: # We use this because we *need* a shell command here
-    - skip_ansible_lint
-
 - name: screen dotfile
   copy:
     src: files/.screenrc
     dest: ~/.screenrc
     mode: 0644
   become: no
-
-- name: install nodejs
-  dnf: name="nodejs"
 
 - name: vte config (regular user)
   lineinfile:

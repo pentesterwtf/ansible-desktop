@@ -1,0 +1,4 @@
+---
+- name: Install gcc/g++
+  dnf:
+    name:  ['gcc', 'gcc-c++']

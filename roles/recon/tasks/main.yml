@@ -1,89 +1,24 @@
 ---
-# CatMyFish - Domain categorisation search
-# https://github.com/Mr-Un1k0d3r/CatMyFish
+# We want golang and gcc for both gobuster and nmap
+- include_role:
+    name: dev
+    tasks_from: golang
 
-- name: Create folder for CatMyfish
-  file: dest=/opt/CatMyFish state=directory mode=0644
+- include_role:
+    name: dev
+    tasks_from: gcc
 
-- name: Pull CatMyFish
-  git: repo=https://github.com/Mr-Un1k0d3r/CatMyFish dest=/opt/CatMyFish umask=000 depth=1 update=no
+- name: Masscan
+  include_tasks: masscan.yml
 
-- name: Set interpreter for catmyfish
-  lineinfile: path=/opt/CatMyFish/CatMyPhish.py  line="#!/usr/bin/env python" insertbefore="BOF"
+- name: nmap
+  include_tasks: nmap.yml
 
-- name: Symlink CatMyFish
-  file:
-    src: /opt/CatMyFish/CatMyPhish.py
-    dest: /usr/bin/catmyfish
-    state: link
+- name: gobuster
+  include_tasks: gobuster.yml
 
-- name: set permissions
-  file:
-    path: /opt/CatMyFish/CatMyPhish.py
-    mode: 0755
+- name: ffuf
+  include_tasks: ffuf.yml
 
-# Domainhunter- domain categorisation search
-# https://github.com/minisllc/domainhunter
-
-- name: Create folder for Domainhunter
-  file: dest=/opt/domainhunter state=directory  mode=0644
-
-- name: Pull Domainhunter
-  git: repo=https://github.com/minisllc/domainhunter.git dest=/opt/domainhunter umask=000 depth=1 update=no
-
-- name: Symlink DomainHunter
-  file:
-    src: /opt/domainhunter/domainhunter.py
-    dest: /usr/bin/domainhunter
-    state: link
-
-- name: set permissions
-  file:
-    path: /opt/domainhunter/domainhunter.py
-    mode: 0755
-
-# Chameleon - domain check / submission for categorisation
-# https://github.com/mdsecactivebreach/Chameleon.git
-
-- name: Create folder
-  file: dest=/opt/chameleon state=directory mode=0644
-
-- name: Pull
-  git: repo=https://github.com/mdsecactivebreach/Chameleon.git dest=/opt/chameleon umask=000 depth=1 update=no
-
-- name: Set interpreter
-  lineinfile: path=/opt/chameleon/chameleon.py  line="#!/usr/bin/env python" insertbefore="BOF"
-
-- name: Dodgy banner hack
-  lineinfile: path=/opt/chameleon/chameleon.py  line="    c.show_banner()" state=absent
-
-- name: Symlink
-  file:
-    src: /opt/chameleon/chameleon.py
-    dest: /usr/bin/chameleon
-    state: link
-
-- name: set permissions
-  file:
-    path: /opt/chameleon/chameleon.py
-    mode: 0755
-
-# https://github.com/robertdavidgraham/masscan
-
-- name: Instal libpcap for masscan
-  dnf:
-    name: ['libpcap-devel']
-
-- name: Check if already installed
-  command: ls -alh /usr/bin/masscan
-  register: is_installed
-  failed_when: is_installed.rc > 2
-  changed_when: no
-
-- name: Pull masscan
-  git: repo=https://github.com/robertdavidgraham/masscan.git dest=/usr/src/masscan umask=000 depth=1 update=no
-  when: is_installed.rc == 2
-
-- name: install
-  shell: cd /usr/src/masscan && make -j && make install
-  when: is_installed.rc == 2
+- name: wordlists
+  include_tasks: wordlists.yml

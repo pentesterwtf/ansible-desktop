@@ -1,0 +1,14 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Test pull and build using golang # noqa 301
+    command:
+      cmd: go get github.com/OJ/gobuster
+    become: no
+  - name:  Test run binary # noqa 301
+    command:
+      cmd: ~/go/bin/gobuster
+    register: run_result
+    become: no

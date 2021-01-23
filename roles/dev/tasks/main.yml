@@ -1,0 +1,92 @@
+---
+- name: Ensure prerequisites are installed
+  dnf:
+    name: ['git', 'python3-pip', 'dnf-plugins-core']
+    state: installed
+
+- name: Ensure .vim exists (non-root)
+  file:
+    path: ~/.vim
+    state: directory
+    mode: 0644
+  become: no
+
+- name: Clone vim-polyglot
+  git:
+    repo: https://github.com/sheerun/vim-polyglot.git
+    dest: /usr/src/vim-polyglot
+    version: 4c10562d2cc9b084518284c49a158558da5180a7
+  register: vimpolyglot
+
+- name: vim-polyglot (non-root)
+  shell: "{{ item }}"
+  with_items:
+    - mkdir -p ~/.vim/pack/plugins/start/vim-polyglot
+    - cp -r /usr/src/vim-polyglot/* ~/.vim/
+  when: vimpolyglot.changed
+  args:
+    warn: false
+  become: no
+  tags: # We use this because we *need* a shell command here
+    - skip_ansible_lint
+
+- name: (root) Ensure .vim  directory exists
+  file:
+    path: ~/.vim
+    state: directory
+    mode: 0644
+
+- name: vim-polyglot (root)
+  shell: "{{ item }}"
+  with_items:
+    - mkdir -p ~/.vim/pack/plugins/start/vim-polyglot
+    - cp -r /usr/src/vim-polyglot/* ~/.vim/
+  when: vimpolyglot.changed
+  args:
+    warn: false
+  tags: # We use this because we *need* a shell command here
+    - skip_ansible_lint
+
+- name: Include gcc
+  include_tasks: gcc.yml
+
+- name: Install jq
+  dnf:
+    name:  ['jq']
+
+- name: (Rust) Check if already installed
+  command: ls -alh ~/.cargo/env
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+  become: no
+
+- name: Install rust nightly
+  shell: set -o pipefail && curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y
+  become: no
+  when: is_installed.rc == 2
+
+- name: Install nodejs
+  dnf:
+    name: ["nodejs"]
+
+- name: Enable bazel copr repo
+  command: dnf copr enable vbatts/bazel -y
+  changed_when: no
+  args:
+    warn: false
+  tags:
+    - molecule-idempotence-notest
+
+- name: Install bazel
+  dnf:
+    name: ['bazel']
+
+- name: Install molecule
+  pip:
+    name: ['molecule[podman]', 'molecule[lint]']
+    state: present
+    executable: pip
+
+- name: Include Golang
+  include_tasks: golang.yml

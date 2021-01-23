@@ -1,0 +1,37 @@
+---
+- name: Ensure dependancies are installed
+  dnf:
+    name: ["unzip", "java-11-openjdk-headless"]
+    state: installed
+
+- name: Pull FLOSS
+  get_url:
+    url: " {{ flossUrl }} "
+    dest: /usr/bin/floss
+    mode: 0755
+- name: ensure ghidra path is created
+  ansible.builtin.file:
+    path: "{{ ghidraPath }}"
+    mode: 0755
+    state: directory
+
+- name: pull and extract ghidra
+  unarchive:
+    src: " {{ ghidraUrl }} "
+    dest: "/opt/"
+    remote_src: yes
+    mode: 0755
+
+- name: Create a symbolic link for Ghidra
+  ansible.builtin.file:
+    src: "{{ ghidraPath }}/ghidraRun"
+    dest: /usr/bin/ghidra
+    owner: root
+    group: root
+    state: link
+
+
+- name: Install binwalk
+  dnf:
+    name: ["binwalk"]
+    state: installed

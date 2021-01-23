@@ -1,0 +1,24 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Create folder for test
+    file:
+      path: /usr/local/src/terraform
+      state: directory
+      mode: 0644
+  - name: Copy terraform test manifest
+    copy:
+      src: files/test.tf
+      dest: /usr/local/src/terraform
+      mode: 0644
+  - name:  Test init # noqa 301
+    command:
+      cmd: terraform init
+      chdir: /usr/local/src/terraform
+    register: run_result
+    become: no
+  - name: Assert
+    assert:
+      that: run_result.stdout.find("Terraform has been successfully initialized!") != -1
