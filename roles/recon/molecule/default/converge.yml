@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include wordlists"
+    - name: "Include recon"
       include_role:
-        name: "wordlists"
+        name: "recon"

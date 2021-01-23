@@ -1,0 +1,12 @@
+---
+wordlistPath: /opt/wordlists
+ffufGitRepo: github.com/ffuf/ffuf
+ffufPath: ~/go/bin/ffuf
+goBusterGitRepo: github.com/OJ/gobuster
+goBusterPath: ~/go/bin/gobuster
+nmapGitRepo: https://github.com/nmap/nmap
+nmapPath: /usr/src/nmap
+nmapHash: c425bb6d62abb9d30e8e81f46dfe0f8ffda96c28
+masscanGitRepo: https://github.com/robertdavidgraham/masscan.git
+masscanPath: /usr/src/masscan
+masscanHash: 41bd24e475f17c63c2bf721c41e5ec0aad1cea18

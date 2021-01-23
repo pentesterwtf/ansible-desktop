@@ -1,0 +1,18 @@
+---
+# https://github.com/robertdavidgraham/masscan
+
+- name: Ensure we have git
+  dnf:
+    name: ['git']
+    state: installed
+
+- name: Instal libpcap for masscan
+  dnf:
+    name: ['libpcap-devel']
+
+- name: Pull masscan
+  git:
+    repo: "{{ masscanGitRepo }}"
+    dest: "{{ masscanPath }}"
+    version: "{{ masscanHash }}"
+  notify: masscan

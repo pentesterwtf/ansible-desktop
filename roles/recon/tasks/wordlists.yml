@@ -2,6 +2,11 @@
 # Fuzzing lists
 # All go under /opt/wordlists
 
+- name: Ensure we have git
+  dnf:
+    name: ['git']
+    state: installed
+
 - name: ensure wordlists folder exists
   file:
     dest: "{{ wordlistPath }}"

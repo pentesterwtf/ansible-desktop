@@ -1,0 +1,19 @@
+---
+- name: masscan
+# Command does not work for either of these
+  shell: # noqa 305
+    chdir: "{{ masscanPath }}"
+    cmd: "{{ item }}"
+  with_items:
+    - make -j
+    - make install
+    - git checkout .
+- name: nmap
+  shell: # noqa 305
+    chdir: "{{ nmapPath }}"
+    cmd: "{{ item }}"
+  with_items:
+    - ./configure >> /dev/null
+    - make -j
+    - make install
+    - git checkout .

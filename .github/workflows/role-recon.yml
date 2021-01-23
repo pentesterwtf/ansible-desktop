@@ -1,11 +1,8 @@
 ---
-name: wordlists
+name: recon
 on:
   push:
   pull_request:
-  schedule:
-    # Run it daily
-    - cron: '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -22,4 +19,4 @@ jobs:
           sudo  python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
-          cd roles/wordlists && molecule test
+          cd roles/recon && molecule test

@@ -47,9 +47,8 @@
   tags: # We use this because we *need* a shell command here
     - skip_ansible_lint
 
-- name: Install gcc/g++
-  dnf:
-    name:  ['gcc', 'gcc-c++']
+- name: Include gcc
+  include_tasks: gcc.yml
 
 - name: Install jq
   dnf:

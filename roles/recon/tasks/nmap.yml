@@ -1,0 +1,13 @@
+---
+#  https://github.com/nmap/nmap
+- name: Ensure we have nmap prerequisites
+  dnf:
+    name: ['git', 'openssl-devel', 'libssh2-devel', 'autoconf']
+    state: installed
+
+- name: Pull nmap
+  git:
+    repo: "{{ nmapGitRepo }}"
+    dest: "{{ nmapPath }}"
+    version: "{{ nmapHash }}"
+  notify: nmap
