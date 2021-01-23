@@ -89,20 +89,5 @@
     state: present
     executable: pip
 
-- name: Install golang
-  dnf:
-    name: ['golang']
-    install_weak_deps: no
-# FYI - Keep in mind that this has a dependency on python-2
-# which ansible is going to default to using once it's installed.
-# This will cause issues like the following:
-# ```
-# fatal: [instance]: FAILED! => {"changed": false, "cmd": "dnf install -y python2-dnf", "msg": "Could not import the dnf python module using /usr/bin/python2.7
-# ```
-# Outside of testing, we just set ansible_python_interpreter to use python3
-
-- name: set gopath (our user)
-  lineinfile:
-    path: ~/.bashrc
-    line: 'export PATH=~/go/bin:$PATH'
-  become: no
+- name: Include Golang
+  include_tasks: golang.yml
