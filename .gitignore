@@ -1,4 +1,0 @@
-deploy.retry
-*.swp
-.vagrant
-site.test.yml
