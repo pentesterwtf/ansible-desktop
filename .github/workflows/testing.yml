@@ -1,0 +1,167 @@
+---
+name: Molecule testing
+on:
+  push:
+  pull_request:
+  schedule:
+    # Run it daily
+    - cron: '0 0 * * *'
+jobs:
+  end-to-end:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          molecule test
+  role-common:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/common && molecule test
+  role-desktop:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/desktop && molecule test
+  role-dev:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/dev && molecule test
+  role-dotnet:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/dotnet && molecule test
+  role-fuzzing:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/fuzzing && molecule test
+    role-hashicorp:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/hashicorp && molecule test
+  role-recon:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/recon && molecule test
+  role-reveng:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/reveng && molecule test
+  role-vscode:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install podman -y
+          sudo  python3 -m pip install "molecule[lint,podman]"
+      - name: Test with molecule
+        run: |
+          cd roles/vscode && molecule test
