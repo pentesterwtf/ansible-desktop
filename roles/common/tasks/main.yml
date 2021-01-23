@@ -22,26 +22,7 @@
 - name: Install common
   dnf:
     name: ['git', 'git-lfs', 'kernel-devel', 'ripgrep',
-    'screen', 'python-pip', 'vim-enhanced', 'python3-libselinux', 'zlib-devel',
-    'golang']
-
-- name: Check if already installed
-  command: ls -alh ~/go/bin/cgasm
-  register: is_installed
-  failed_when: is_installed.rc > 2
-  changed_when: no
-  become: no
-
-- name: Install cgasm
-  shell: go get github.com/bnagy/cgasm
-  become: no
-  when: is_installed.rc == 2
-  tags: # We use this because we *need* a shell command here
-    - skip_ansible_lint
-
-- name: Install python things
-  pip:
-    name: ['speedtest-cli', 'dnspython']
+    'screen', 'python-pip', 'vim-enhanced', 'python3-libselinux', 'zlib-devel']
 
 - name: Set time to AEST
   timezone:
