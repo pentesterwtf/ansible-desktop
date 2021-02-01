@@ -32,7 +32,7 @@
   file:
     path: /usr/src
     state: directory
-    mode: 0644
+    mode: 0755
 
 - name: clone bash_it
   git:

@@ -94,7 +94,7 @@
     src: " {{ latest_url.stdout }} "
     dest: /usr/local/bin/
     copy: no
-    mode: 0644
+    mode: 0755
   when: (is_installed.rc == 2) or (newbuild.rc == 130)
 
 - name: Install prereqs for vagrant

@@ -8,7 +8,7 @@
   file:
     path: ~/.vim
     state: directory
-    mode: 0644
+    mode: 0755
   become: no
 
 - name: Clone vim-polyglot

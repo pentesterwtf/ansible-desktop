@@ -12,7 +12,7 @@
     src: " {{ aflUrl }} "
     dest: /usr/src/
     remote_src: yes
-    mode: 0644
+    mode: 0755
   notify: Compile and install afl
 
 - name: Enable core dumps # noqa 301
