@@ -8,6 +8,10 @@
   dnf:
     name: ['libvirt-devel', '@virtualization']
 
+- name: Install swtpm/swtpm-tools for virtualised TPM
+  dnf:
+    name: ['swtpm', 'swtpm-tools']
+
 - name: Add user to libvirt group
   user:
     name: "{{ lookup('env','USERNAME') }}"
