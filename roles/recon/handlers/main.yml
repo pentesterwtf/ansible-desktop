@@ -14,6 +14,6 @@
     cmd: "{{ item }}"
   with_items:
     - ./configure >> /dev/null
-    - make -j
+    - make -j >> /dev/null
     - make install
     - git checkout .
