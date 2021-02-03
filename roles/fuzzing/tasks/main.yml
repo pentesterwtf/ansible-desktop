@@ -14,6 +14,8 @@
     remote_src: yes
     mode: 0755
   notify: Compile and install afl
+  retries: 3 # Have retries on this, as sometimes Halvar's site seems to be a bit iffy.
+  # That or github action runners are trash.
 
 - name: Enable core dumps # noqa 301
   shell: echo core > /proc/sys/kernel/core_pattern
