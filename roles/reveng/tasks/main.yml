@@ -21,6 +21,7 @@
     dest: "/opt/"
     remote_src: yes
     mode: 0755
+  retries: 5
 
 - name: Create a symbolic link for Ghidra
   ansible.builtin.file:
