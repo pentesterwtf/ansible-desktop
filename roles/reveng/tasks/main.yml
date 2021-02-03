@@ -21,6 +21,8 @@
     dest: "/opt/"
     remote_src: yes
     mode: 0755
+  register: ghidra
+  until: ghidra is succeeded
   retries: 5
 
 - name: Create a symbolic link for Ghidra

@@ -17,3 +17,6 @@
     - make -j >> /dev/null
     - make install
     - git checkout .
+  register: nmap
+  until: nmap is succeeded
+  retries: 5
