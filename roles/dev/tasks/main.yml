@@ -94,3 +94,8 @@
 
 - name: Include Golang
   include_tasks: golang.yml
+
+- name: Install podman-compose
+  pip:
+    name: podman-compose
+    state: present
