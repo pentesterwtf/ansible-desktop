@@ -88,7 +88,7 @@
 
 - name: Install molecule
   pip:
-    name: ['molecule[podman]', 'molecule[lint]', 'ansible-lint']
+    name: ['molecule[podman]', 'molecule[lint]', 'ansible-lint', 'molecule-vagrant', 'python-vagrant']
     state: present
     executable: pip
 
