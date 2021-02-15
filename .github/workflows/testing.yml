@@ -17,10 +17,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
+          sudo dpkg -P skopeo podman buildah
+          sudo apt --fix-broken install
           sudo apt-get -y update
-          sudo apt remove buildah podman -y
-          sudo apt autoremove -y
-          sudo apt-get install podman -y
+          sudo apt-get -y upgrade
+          sudo apt-get -y autoremove
+          sudo apt-get install podman buildah spopeo -y
           sudo  python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
