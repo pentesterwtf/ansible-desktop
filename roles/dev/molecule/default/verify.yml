@@ -7,8 +7,13 @@
     command:
       cmd: go get github.com/OJ/gobuster
     become: no
-  - name:  Test run binary # noqa 301
+  - name:  Test run gobuster # noqa 301
     command:
       cmd: ~/go/bin/gobuster
+    register: run_result
+    become: no
+  - name:  Test run bazelisk # noqa 301
+    command:
+      cmd: ~/go/bin/bazelisk
     register: run_result
     become: no
