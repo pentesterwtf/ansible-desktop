@@ -10,3 +10,5 @@ nmapHash: c425bb6d62abb9d30e8e81f46dfe0f8ffda96c28
 masscanGitRepo: https://github.com/robertdavidgraham/masscan.git
 masscanPath: /usr/src/masscan
 masscanHash: 41bd24e475f17c63c2bf721c41e5ec0aad1cea18
+gauRepo: github.com/lc/gau
+gauPath: ~/go/bin/gau
