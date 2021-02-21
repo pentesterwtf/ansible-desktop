@@ -55,3 +55,7 @@
 - name: Install metasploit
   dnf:
     name: ['metasploit-framework']
+
+- name: Install Pinta
+  dnf:
+    name: ['pinta']
