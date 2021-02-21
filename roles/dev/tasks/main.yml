@@ -94,3 +94,7 @@
 
 - name: Include Golang
   include_tasks: golang.yml
+
+- name: Add black formatter for python
+  dnf:
+    name: ['black']
