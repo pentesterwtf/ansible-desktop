@@ -1,7 +1,7 @@
 ---
 - name: Ensure dependancies are installed
   dnf:
-    name: ["unzip", "java-11-openjdk-headless"]
+    name: ["unzip", "java-11-openjdk-headless", "java-latest-openjdk-devel", "java-latest-openjdk"]
     state: installed
 
 - name: Pull FLOSS
@@ -33,6 +33,11 @@
     group: root
     state: link
 
+- name: Create ghidra desktop shortcut
+  template:
+    src: files/ghidra.desktop.j2
+    dest: /usr/share/applications/ghidra.desktop
+    mode: 0644
 
 - name: Install binwalk
   dnf:
