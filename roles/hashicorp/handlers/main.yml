@@ -1,0 +1,5 @@
+---
+- name: awscli
+  command:
+    cmd: ./install --update
+    chdir: " {{ awsCliLoc }} "
