@@ -3,7 +3,7 @@ wordlistPath: /opt/wordlists
 ffufGitRepo: github.com/ffuf/ffuf
 ffufPath: ~/go/bin/ffuf
 goBusterGitRepo: github.com/OJ/gobuster
-goBusterPath: ~/go/bin/gobuster
+goBusterPath: /usr/local/bin/gobuster
 nmapGitRepo: https://github.com/nmap/nmap
 nmapPath: /usr/src/nmap
 nmapHash: c425bb6d62abb9d30e8e81f46dfe0f8ffda96c28
