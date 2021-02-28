@@ -140,14 +140,16 @@
 
 - name: Install vault
   unarchive:
-    remote_src: https://releases.hashicorp.com/vault/0.9.1/vault_0.9.1_linux_amd64.zip
+    src: https://releases.hashicorp.com/vault/0.9.1/vault_0.9.1_linux_amd64.zip
     dest: /usr/bin/
     mode: 0755
+    copy: no
   when: is_installed.rc == 2
 
 - name: Download awscliv2
   unarchive:
-    remote_src: " {{ awscliUrl }}"
+    src: " {{ awscliUrl }}"
     dest: /usr/src/
     mode: 0755
+    copy: no
   notify: awscli
