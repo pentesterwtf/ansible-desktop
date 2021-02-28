@@ -74,18 +74,6 @@
   dnf:
     name: ["nodejs"]
 
-- name: Enable bazel copr repo
-  command: dnf copr enable vbatts/bazel -y
-  changed_when: no
-  args:
-    warn: false
-  tags:
-    - molecule-idempotence-notest
-
-- name: Install bazel
-  dnf:
-    name: ['bazel']
-
 - name: Install molecule
   pip:
     name: ['molecule[podman]', 'molecule[lint]', 'ansible-lint', 'molecule-vagrant', 'python-vagrant']
@@ -94,6 +82,9 @@
 
 - name: Include Golang
   include_tasks: golang.yml
+
+- name: Include bazelisk
+  include_tasks: bazel.yml
 
 - name: Add black formatter for python
   dnf:
