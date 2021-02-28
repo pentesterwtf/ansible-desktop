@@ -22,3 +22,6 @@
 
 - name: wordlists
   include_tasks: wordlists.yml
+
+- name: gau
+  include_tasks: gau.yml

@@ -76,7 +76,7 @@
 
 - name: Install molecule
   pip:
-    name: ['molecule[podman]', 'molecule[lint]', 'ansible-lint']
+    name: ['molecule[podman]', 'molecule[lint]', 'ansible-lint', 'molecule-vagrant', 'python-vagrant']
     state: present
     executable: pip
 
@@ -85,3 +85,8 @@
 
 - name: Include bazelisk
   include_tasks: bazel.yml
+
+- name: Add black formatter for python
+  dnf:
+    name: ['black']
+
