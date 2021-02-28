@@ -89,4 +89,3 @@
 - name: Add black formatter for python
   dnf:
     name: ['black']
-
