@@ -7,12 +7,12 @@
   tasks:
   - name:  Test run gobuster # noqa 301
     command:
-      cmd: /usr/local/bin/gobuster
+      cmd: "{{ goBusterPath }}"
     register: run_result
     become: no
   - name:  Test run ffuf # noqa 301
     command:
-      cmd: ~/go/bin/ffuf -V
+      cmd: "{{ ffufPath }}"
     register: run_result
     become: no
   - name:  Test run nmap  # noqa 301

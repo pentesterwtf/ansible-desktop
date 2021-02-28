@@ -14,7 +14,7 @@
 # Neither of which handle 7z files
 - name: Download GoBuster
   get_url:
-    url: https://github.com/OJ/gobuster/releases/download/v3.1.0/gobuster-linux-amd64.7z
+    url: " {{ goBusterReleaseUrl }}"
     dest: /tmp/
   when: is_installed.rc == 2
 

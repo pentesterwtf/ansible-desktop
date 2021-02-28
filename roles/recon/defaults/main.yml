@@ -2,7 +2,7 @@
 wordlistPath: /opt/wordlists
 ffufGitRepo: github.com/ffuf/ffuf
 ffufPath: ~/go/bin/ffuf
-goBusterGitRepo: github.com/OJ/gobuster
+goBusterReleaseUrl: https://github.com/OJ/gobuster/releases/download/v3.1.0/gobuster-linux-amd64.7z
 goBusterPath: /usr/local/bin/gobuster
 nmapGitRepo: https://github.com/nmap/nmap
 nmapPath: /usr/src/nmap
