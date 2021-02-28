@@ -104,7 +104,7 @@
 - name: Install prereqs for vagrant
   dnf:
     name: ['git',
-'gcc', 'gcc-c++', '@virtualization', 'zlib-devel', 'awscli', 'ruby-devel',
+'gcc', 'gcc-c++', '@virtualization', 'zlib-devel', 'ruby-devel',
 'qemu', 'libvirt', 'libvirt-devel', 'rubygem-ruby-libvirt', 'libxslt-devel',
 'libxml2-devel', 'libguestfs-tools-c', 'make', 'vagrant', 'vagrant-libvirt']
 # Populate list of plugins installed for vagrant
@@ -138,10 +138,16 @@
   failed_when: is_installed.rc > 2
   changed_when: no
 
-- name: Install
+- name: Install vault
   unarchive:
-    src: https://releases.hashicorp.com/vault/0.9.1/vault_0.9.1_linux_amd64.zip
+    remote_src: https://releases.hashicorp.com/vault/0.9.1/vault_0.9.1_linux_amd64.zip
     dest: /usr/bin/
-    copy: no
     mode: 0755
   when: is_installed.rc == 2
+
+- name: Download awscliv2
+  unarchive:
+    remote_src: " {{ awscliUrl }}"
+    dest: /usr/src/
+    mode: 0755
+  notify: awscli
