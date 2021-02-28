@@ -1,18 +1,16 @@
 ---
-# This is an example playbook to execute Ansible tests.
-
 - name: Verify
   hosts: all
   gather_facts: false
   tasks:
   - name:  Test run gobuster # noqa 301
     command:
-      cmd: "{{ goBusterPath }}"
+      cmd: /usr/local/bin/gobuster
     register: run_result
     become: no
   - name:  Test run ffuf # noqa 301
     command:
-      cmd: "{{ ffufPath }}"
+      cmd: ~/go/bin/ffuf
     register: run_result
     become: no
   - name:  Test run nmap  # noqa 301
