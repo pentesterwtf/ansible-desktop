@@ -10,7 +10,7 @@
     become: no
   - name:  Test run ffuf # noqa 301
     command:
-      cmd: ~/go/bin/ffuf
+      cmd: ~/go/bin/ffuf -V
     register: run_result
     become: no
   - name:  Test run nmap  # noqa 301
