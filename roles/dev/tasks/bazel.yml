@@ -1,0 +1,12 @@
+---
+- name: Check if already installed
+  command: ls -alh {{ bazeliskPath }}
+  register: is_installed
+  failed_when: is_installed.rc > 2
+  changed_when: no
+  become: no
+
+- name: Get bazelisk # noqa 301
+  command: go get {{ bazeliskGitRepo }}
+  become: no
+  when: is_installed.rc == 2

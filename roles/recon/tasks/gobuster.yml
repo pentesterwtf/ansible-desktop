@@ -1,4 +1,8 @@
 ---
+- name: Ensure unzip installed
+  dnf:
+    name: ['p7zip']
+
 - name: Check if already installed
   command: ls -alh {{ goBusterPath }}
   register: is_installed
@@ -6,7 +10,16 @@
   changed_when: no
   become: no
 
-- name: Get gobuster # noqa 301
-  command: go get {{ goBusterGitRepo }}
-  become: no
+# We can't use unarchive because it will always use unarchive / gtar
+# Neither of which handle 7z files
+- name: Download GoBuster
+  get_url:
+    url: " {{ goBusterReleaseUrl }}"
+    dest: /tmp/
+  when: is_installed.rc == 2
+
+- name: extract
+  shell: 7za x gobuster-linux-amd64.7z && mv gobuster-linux-amd64/gobuster {{ goBusterPath }} && chmod 0755 {{ goBusterPath }}
+  args:
+    chdir: /tmp
   when: is_installed.rc == 2

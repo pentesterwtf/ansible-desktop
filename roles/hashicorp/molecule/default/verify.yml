@@ -22,3 +22,6 @@
   - name: Assert
     assert:
       that: run_result.stdout.find("Terraform has been successfully initialized!") != -1
+  - name:  Test run awscli # noqa 301
+    command:
+      cmd: aws --version

@@ -3,3 +3,5 @@ terraformUrl: "https://releases.hashicorp.com/terraform/0.14.4/terraform_0.14.4_
 terraformInventoryUrl: "https://github.com/adammck/terraform-inventory/releases/download/v0.7-pre/terraform-inventory_v0.7-pre_linux_amd64.zip"
 terraformProviderUrl: "https://github.com/dmacvicar/terraform-provider-libvirt/releases/download/v0.6.3/terraform-provider-libvirt-0.6.3+git.1604843676.67f4f2aa.Fedora_32.x86_64.tar.gz" # noqa 204
 terraformProviderPath: .terraform.d/plugins/registry.terraform.io/hashicorp/libvirt/0.6.3/linux_amd64/
+awscliUrl: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+awsCliLoc: /usr/src/aws/

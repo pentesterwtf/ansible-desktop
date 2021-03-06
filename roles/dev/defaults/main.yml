@@ -1,2 +1,3 @@
 ---
-# defaults file for dev
+bazeliskPath: ~/go/bin/bazelisk
+bazeliskGitRepo: github.com/bazelbuild/bazelisk
