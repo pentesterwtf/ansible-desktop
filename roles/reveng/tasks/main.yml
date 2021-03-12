@@ -43,3 +43,9 @@
   dnf:
     name: ["binwalk"]
     state: installed
+
+- name: Install jd-gui
+  dnf:
+    name: https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-1.6.6.rpm
+    state: installed
+    disable_gpg_check: true
