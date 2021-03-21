@@ -1,10 +1,12 @@
 ---
 # We want golang and gcc for both gobuster and nmap
-- include_role:
+- name: Include golang
+  include_role:
     name: dev
     tasks_from: golang
 
-- include_role:
+- name: Include gcc
+  include_role:
     name: dev
     tasks_from: gcc
 
