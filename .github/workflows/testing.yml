@@ -19,7 +19,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           molecule test
@@ -35,7 +35,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/common && molecule test
@@ -51,7 +51,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/desktop && molecule test
@@ -67,7 +67,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/dev && molecule test
@@ -83,7 +83,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/dotnet && molecule test
@@ -99,7 +99,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/fuzzing && molecule test
@@ -115,7 +115,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/hashicorp && molecule test
@@ -131,7 +131,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/recon && molecule test
@@ -147,7 +147,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/reveng && molecule test
@@ -163,7 +163,7 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,podman]"
       - name: Test with molecule
         run: |
           cd roles/vscode && molecule test
