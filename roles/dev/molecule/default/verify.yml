@@ -5,7 +5,7 @@
   tasks:
   - name: Test pull and build using golang # noqa 301
     command:
-      cmd: go get github.com/golang/example/hello
+      cmd: go get golang.org/x/example/hello
     become: no
   - name:  Test run gobuster # noqa 301
     command:
