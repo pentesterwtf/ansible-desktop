@@ -6,7 +6,7 @@ goBusterReleaseUrl: https://github.com/OJ/gobuster/releases/download/v3.1.0/gobu
 goBusterPath: /usr/local/bin/gobuster
 nmapGitRepo: https://github.com/nmap/nmap
 nmapPath: /usr/src/nmap
-nmapHash: c425bb6d62abb9d30e8e81f46dfe0f8ffda96c28
+nmapHash: 4b46fa7097673f157e7b93e72f0c8b3249c54b4c
 masscanGitRepo: https://github.com/robertdavidgraham/masscan.git
 masscanPath: /usr/src/masscan
 masscanHash: 41bd24e475f17c63c2bf721c41e5ec0aad1cea18
