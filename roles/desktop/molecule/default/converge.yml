@@ -2,6 +2,12 @@
 - name: Converge
   hosts: all
   tasks:
+    - name: upgrade all packages # noqa 403
+      dnf:
+        name: "*"
+        state: latest
+      tags:
+      - molecule-idempotence-notest
     - name: "Include desktop"
       include_role:
         name: "desktop"
