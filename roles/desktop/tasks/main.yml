@@ -2,7 +2,7 @@
 - name: Install common
   dnf:
     name: ['screen', 'vim-enhanced', 'aria2', 'remmina',
-    'fedora-workstation-repositories']
+    'fedora-workstation-repositories', 'dnf-plugins-core']
 
 - name: Enable Google Chrome in Fedora-Workstation-Repositories
   dnf:
