@@ -14,18 +14,6 @@
   dnf:
     name: ['google-chrome-stable']
 
-- name: Enable Signal Desktop Copr Repository
-  yum_repository:
-    name: signal
-    description: Copr repo for Signal-Desktop owned by luminoso
-    baseurl: https://download.copr.fedorainfracloud.org/results/luminoso/Signal-Desktop/fedora-$releasever-$basearch/
-    gpgcheck: yes
-    gpgkey: https://download.copr.fedorainfracloud.org/results/luminoso/Signal-Desktop/pubkey.gpg
-
-- name: Install signal-desktop
-  dnf:
-    name: ['signal-desktop']
-
 - name: Add kubernetes repo
   yum_repository:
     name: kubernetes
