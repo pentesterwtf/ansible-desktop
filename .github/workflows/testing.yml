@@ -20,8 +20,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           molecule test
@@ -38,8 +37,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/common && molecule test
@@ -56,8 +54,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/desktop && molecule test
@@ -74,8 +71,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/dev && molecule test
@@ -92,8 +88,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/dotnet && molecule test
@@ -110,8 +105,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/fuzzing && molecule test
@@ -128,8 +122,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/hashicorp && molecule test
@@ -146,8 +139,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/recon && molecule test
@@ -164,8 +156,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/reveng && molecule test
@@ -182,8 +173,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo pip install ansible-base
-          sudo python3 -m pip install "molecule[lint,podman]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible]"
       - name: Test with molecule
         run: |
           cd roles/vscode && molecule test
