@@ -7,7 +7,7 @@
   vars:
     # The front page of ghidra-sre.org has a SHA hash of the latest release
     # We use this to figure out if we're running latest as part of the verify script
-    latestCheckHash: 8cf8806dd5b8b7c7826f04fad8b86fc7e07ea380eae497f3035f8c974de72cf8
+    latestCheckHash: 9019c78f8b38d68fd40908b040466974a370e26ba51b2aaeafc744171040f714
     latestCheckUrl: https://ghidra-sre.org
   tasks:
   - name: Ensure we're grabbing latest
