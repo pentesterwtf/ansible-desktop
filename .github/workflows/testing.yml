@@ -20,7 +20,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install podman -y
           sudo apt-get remove ansible -y
-          sudo python3 -m pip install "molecule[lint,podman,ansible]"
+          sudo python3 -m pip install "molecule[lint,podman,ansible,ansible-base]"
       - name: Test with molecule
         run: |
           molecule test
