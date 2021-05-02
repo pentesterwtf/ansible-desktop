@@ -6,7 +6,6 @@
   roles:
     - uptodate
     - common
-    - dotnet
     - desktop
     - dev
     - fuzzing

@@ -75,23 +75,6 @@ jobs:
       - name: Test with molecule
         run: |
           cd roles/dev && molecule test
-  role-dotnet:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          sudo apt-get -y update
-          sudo apt-get install podman -y
-          sudo apt-get remove ansible -y
-          sudo python3 -m pip install "molecule[lint,podman,ansible]"
-      - name: Test with molecule
-        run: |
-          cd roles/dotnet && molecule test
   role-fuzzing:
     runs-on: ubuntu-20.04
     steps:

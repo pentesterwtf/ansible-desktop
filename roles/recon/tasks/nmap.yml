@@ -2,7 +2,7 @@
 #  https://github.com/nmap/nmap
 - name: Ensure we have nmap prerequisites
   dnf:
-    name: ['git', 'openssl-devel', 'libssh2-devel', 'autoconf']
+    name: ['git', 'openssl-devel', 'libssh2-devel', 'autoconf', 'gcc', 'g++']
     state: installed
 
 - name: Pull nmap

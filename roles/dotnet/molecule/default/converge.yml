@@ -1,7 +1,0 @@
----
-- name: Converge
-  hosts: all
-  tasks:
-    - name: "Include dotnet/mono"
-      include_role:
-        name: "dotnet"
