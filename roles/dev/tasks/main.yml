@@ -98,6 +98,16 @@
   dnf:
     name: ['skopeo']
 
+- name: Install boop prereqs
+  dnf:
+    name: ['gtksourceview3']
+
+- name: Download boop
+  get_url:
+    url: https://github.com/zoeyfyi/Boop-GTK/releases/latest/download/boop-gtk.linux.amd64
+    dest: /usr/bin/boop
+    mode: '0755'
+
 - name: Include bazelisk
   include_tasks: bazel.yml
   
