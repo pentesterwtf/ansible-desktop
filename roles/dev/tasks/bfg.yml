@@ -1,0 +1,19 @@
+---
+- name: Ensure prerequisites are installed
+  dnf:
+    name: ['java-11-openjdk-headless']
+    state: installed
+
+- name: Pull BFG
+  get_url:
+    url: " {{ bfgUrl }} "
+    dest: /uopt/bfg.jar
+    mode: 0755
+
+- name: Template launcher
+  ansible.builtin.template:
+    src: files/bdf.j2
+    dest: /usr/bin/bfg
+    owner: bin
+    group: wheel
+    mode: '755'

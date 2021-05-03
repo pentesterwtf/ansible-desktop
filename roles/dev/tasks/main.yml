@@ -83,6 +83,9 @@
 - name: Include Golang
   include_tasks: golang.yml
 
+- name: Include bfg
+  include_tasks: bfg.yml
+
 - name: Install podman-compose
   pip:
     name: podman-compose

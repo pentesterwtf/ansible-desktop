@@ -17,3 +17,8 @@
       cmd: ~/go/bin/bazelisk
     register: run_result
     become: no
+  - name:  Test run bazelisk # noqa 301
+    command:
+      cmd: bfg
+    register: run_result
+    become: no
