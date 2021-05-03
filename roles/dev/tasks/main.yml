@@ -94,5 +94,10 @@
     name: podman-compose
     state: present
 
+- name: Install spokeo (Docker inspect for registries)
+  dnf:
+    name: ['skopeo']
+
 - name: Include bazelisk
   include_tasks: bazel.yml
+  
