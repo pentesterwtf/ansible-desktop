@@ -54,6 +54,9 @@
 - name: Include gcc
   include_tasks: gcc.yml
 
+- name: Include python
+  include_tasks: python.yml
+
 - name: Install jq
   dnf:
     name:  ['jq']
@@ -91,16 +94,5 @@
     name: podman-compose
     state: present
 
-
-
 - name: Include bazelisk
   include_tasks: bazel.yml
-
-- name: Add black formatter for python
-  dnf:
-    name: ['black']
-
-- name: Install pylint
-  pip:
-    name: pylint
-    state: present
