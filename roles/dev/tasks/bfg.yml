@@ -12,7 +12,7 @@
 
 - name: Template launcher
   ansible.builtin.template:
-    src: files/bdf.j2
+    src: files/bfg.j2
     dest: /usr/bin/bfg
     owner: bin
     group: wheel
