@@ -7,7 +7,7 @@
 - name: Pull BFG
   get_url:
     url: " {{ bfgUrl }} "
-    dest: /uopt/bfg.jar
+    dest: /opt/bfg.jar
     mode: 0755
 
 - name: Template launcher
