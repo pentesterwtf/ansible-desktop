@@ -1,0 +1,12 @@
+---
+- name: Add black formatter for python
+  dnf:
+    name: ['black']
+
+- name: Install pyenv
+  dnf:
+    name: ['python-virtualenv']
+- name: Install pylint
+  pip:
+    name: pylint
+    state: present

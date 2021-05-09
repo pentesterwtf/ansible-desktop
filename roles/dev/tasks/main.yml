@@ -54,6 +54,9 @@
 - name: Include gcc
   include_tasks: gcc.yml
 
+- name: Include python
+  include_tasks: python.yml
+
 - name: Install jq
   dnf:
     name:  ['jq']
@@ -83,21 +86,28 @@
 - name: Include Golang
   include_tasks: golang.yml
 
+- name: Include bfg
+  include_tasks: bfg.yml
+
 - name: Install podman-compose
   pip:
     name: podman-compose
     state: present
 
+- name: Install spokeo (Docker inspect for registries)
+  dnf:
+    name: ['skopeo']
 
+- name: Install boop prereqs
+  dnf:
+    name: ['gtksourceview3']
+
+- name: Download boop
+  get_url:
+    url: https://github.com/zoeyfyi/Boop-GTK/releases/latest/download/boop-gtk.linux.amd64
+    dest: /usr/bin/boop
+    mode: '0755'
 
 - name: Include bazelisk
   include_tasks: bazel.yml
-
-- name: Add black formatter for python
-  dnf:
-    name: ['black']
-
-- name: Install pylint
-  pip:
-    name: pylint
-    state: present
+  
