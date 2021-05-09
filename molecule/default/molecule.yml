@@ -3,10 +3,6 @@ dependency:
   name: galaxy
 driver:
   name: podman
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
 platforms:
   - name: instance
     image: docker.io/fedora:34
@@ -20,7 +16,6 @@ provisioner:
 scenario:
   name: default
   test_sequence:
-    - lint
     - destroy
     - syntax
     - create
