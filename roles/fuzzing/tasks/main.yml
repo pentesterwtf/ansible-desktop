@@ -5,7 +5,7 @@
 
 - name: Install prereqs for afl++
   dnf:
-    name: [ 'gnuplot', 'libtool', 'make', 'automake', 'bison', 'glib2', 'glib2-devel', 'msgpack-devel']
+    name: [ 'gnuplot', 'libtool', 'make', 'automake', 'bison', 'glib2', 'glib2-devel', 'msgpack-devel', "clang", "llvm", "lld", "llvm-devel", "clang-devel"]
 
   
 - name: Pull masscan
