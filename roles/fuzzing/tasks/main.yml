@@ -20,9 +20,10 @@
         "lld",
         "llvm-devel",
         "clang-devel",
+        "git"
       ]
 
-- name: Pull masscan
+- name: Pull afl++
   git:
     repo: "{{ AflGitRepo }}"
     dest: "{{ aflPath }}"
