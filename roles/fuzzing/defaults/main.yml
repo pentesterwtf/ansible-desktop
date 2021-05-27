@@ -1,4 +1,4 @@
 ---
 aflPath: /usr/src/afl++/
 AflGitRepo: https://github.com/AFLplusplus/AFLplusplus.git
-AflHash: 95f47ac3a4d23b28a573a0614893d7aac5f5d4b4
+aflHash: 95f47ac3a4d23b28a573a0614893d7aac5f5d4b4
