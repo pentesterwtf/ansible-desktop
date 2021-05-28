@@ -29,6 +29,8 @@
     dest: "{{ aflPath }}"
     version: "{{ aflHash }}"
   notify: Compile and install afl++
+  tags:
+    - molecule-idempotence-notest
 
 - name: Enable core dumps # noqa 301
   shell: echo core > /proc/sys/kernel/core_pattern
