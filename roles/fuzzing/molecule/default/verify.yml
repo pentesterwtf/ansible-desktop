@@ -1,0 +1,15 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name:  Test run afl-clang-fast # noqa 301
+    command:
+      cmd: afl-clang-fast --version
+    register: run_result
+    become: no
+  - name:  Test run afl-clang-fast++ # noqa 301
+    command:
+      cmd: afl-clang-fast++ --version
+    register: run_result
+    become: no

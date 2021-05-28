@@ -1,21 +1,36 @@
 ---
 - name: Install radamsa
   dnf:
-    name: ['radamsa']
+    name: ["radamsa"]
 
-- name: Install prereqs for afl
+- name: Install prereqs for afl++
   dnf:
-    name: [ 'gnuplot', 'libtool', 'make', 'automake', 'bison', 'glib2', 'glib2-devel', 'msgpack-devel']
+    name:
+      [
+        "gnuplot",
+        "libtool",
+        "make",
+        "automake",
+        "bison",
+        "glib2",
+        "glib2-devel",
+        "msgpack-devel",
+        "clang",
+        "llvm",
+        "lld",
+        "llvm-devel",
+        "clang-devel",
+        "git"
+      ]
 
-- name: Download and unpack
-  unarchive:
-    src: " {{ aflUrl }} "
-    dest: /usr/src/
-    remote_src: yes
-    mode: 0755
-  notify: Compile and install afl
-  retries: 3 # Have retries on this, as sometimes Halvar's site seems to be a bit iffy.
-  # That or github action runners are trash.
+- name: Pull afl++
+  git:
+    repo: "{{ AflGitRepo }}"
+    dest: "{{ aflPath }}"
+    version: "{{ aflHash }}"
+  notify: Compile and install afl++
+  tags:
+    - molecule-idempotence-notest
 
 - name: Enable core dumps # noqa 301
   shell: echo core > /proc/sys/kernel/core_pattern
