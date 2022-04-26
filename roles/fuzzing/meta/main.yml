@@ -1,6 +1,6 @@
 galaxy_info:
   author: PentesterWTF
-  description: Installs common fuzzing utilities on Fedora 34
+  description: Installs common fuzzing utilities on Fedora 35
   role_name: fuzzing
   namespace: pentesterwtf
 
@@ -32,6 +32,7 @@ galaxy_info:
   - name: Fedora
     versions:
     - 34
+    - 35
   #   - 25
   # - name: SomePlatform
   #   versions:
