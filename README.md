@@ -1,6 +1,6 @@
 # Desktop Deploy
 
-* Ansible script to deploy a Fedora 34 host.
+* Ansible script to deploy a Fedora 35 host.
 
 
 ## Running

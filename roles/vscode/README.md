@@ -1,7 +1,7 @@
 Visual Studio Code
 =========
 
-Installs visual studio code on Fedora 34+
+Installs visual studio code on Fedora 35+
 
 License
 -------
